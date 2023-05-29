@@ -1,0 +1,68 @@
+import React from 'react'
+import { Button, Form } from 'react-bootstrap'
+import '../Expenses/style.css';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+
+
+const FormExpense = () => {
+    const {register, handleSubmit} = useForm();
+
+    const onSubmit = FormData => {
+        addExpense(FormData)
+    }
+
+    // RUTA POST PARA AÑADIR GASTO ***********
+    const addExpense = async (newExpense) => {
+        try {
+            await axios.post('', newExpense);
+        } catch (error) {
+            console.error('Error create Expense', error)
+        }
+    };
+
+
+  return (
+    <div className='main__container'>
+        <div className='title_expense'>
+            <h2>Expenses</h2>
+        </div>
+
+        <div className='total__expense'>
+        <Form.Control as='input'  size='lg' disabled readOnly/>
+        </div>
+    
+    <Form onSubmit={handleSubmit(onSubmit)} className='custom__form__expense'>
+        <Form.Group>
+            <Form.Label>Title Expense:</Form.Label>
+            <Form.Control required className='add__expense' type='text' placeholder='Add Expense' {...register('expense', {required:true})} />
+        </Form.Group>
+        <Form.Group>
+            <Form.Control required className='amount' type='number' placeholder='Add Amount' {...register('amount')} />
+        </Form.Group>
+        <Form.Group>
+            <Form.Control  className='date' type='date' {...register('date')} />
+        </Form.Group>
+        <Form.Group className='select__option__expense' {...register('options')}>
+        <Form.Select>
+            <option>Select option</option>
+            <option value='1'>Education</option>
+            <option value='2'>Groceries</option>
+            <option value='3'>Health</option>
+            <option value='4'>Subscriptions</option>
+            <option value='5'>Takeaways</option>
+            <option value='6'>Clothing</option>
+            <option value='7'>Travelling</option>
+            <option value='8'>Other</option>
+        </Form.Select>
+        </Form.Group>
+        <Form.Group>
+            <Form.Control className='amount' as='textarea' placeholder='Add description' {...register('description')}/>
+        </Form.Group> <br/>
+        <Button onClick={addExpense} className='button__add' variant="outline-primary">Add Expense</Button>
+    </Form>
+    </div>
+  )
+}
+
+export default FormExpense

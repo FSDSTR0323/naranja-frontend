@@ -14,11 +14,12 @@ const FormIncome = () => {
 
     const addIncome = async (newIncome) => {
         try {
-            await axios.post('', newIncome);
+            await axios.post('http://localhost:5000/add-income', newIncome);
         } catch (error) {
             console.error('Error create Income', error)
         }
     };
+
 
 
   return (
@@ -42,9 +43,9 @@ const FormIncome = () => {
         <Form.Group>
             <Form.Control  className='date' type='date' {...register('date')} />
         </Form.Group>
-        <Form.Group className='select__option__income' {...register('options')}>
+        <Form.Group className='select__category__income' {...register('category')}>
         <Form.Select>
-            <option>Select option</option>
+            <option>Select category</option>
             <option value='1'>Education</option>
             <option value='2'>Groceries</option>
             <option value='3'>Health</option>
@@ -58,7 +59,7 @@ const FormIncome = () => {
         <Form.Group>
             <Form.Control className='amount' as='textarea' placeholder='Add description' {...register('description')}/>
         </Form.Group> <br/>
-        <Button onClick={addIncome} className='button__add' variant="outline-primary">Add Income</Button>
+        <Button type='submit' onClick={addIncome} className='button__add' variant="outline-primary">Add Income</Button>
     </Form>
     </div>
   )

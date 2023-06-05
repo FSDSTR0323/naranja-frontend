@@ -1,0 +1,34 @@
+.container__login {
+    display: flex;
+    justify-content: center;
+}
+
+#sign-in-form {
+    max-width: 330px;
+  }
+  
+  .bootstrap-logo {
+    width: 72px;
+    height: 72px;
+  }
+  
+  .form-control:focus {
+    z-index: 5;
+  }
+
+  .enterAccount__title {
+    font-weight: bolder !important;
+  }
+
+  .btn__signIn {
+    background: #f7a20e;
+    border: none;
+  }
+  .btn__signIn:hover {
+    background: #ffc259;
+  }
+  .btn__signIn:active  {
+    background: #d8bf92;
+  }
+
+  

@@ -6,7 +6,8 @@ import Menu from './Components/Menu';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ViewTransactions from './Components/ViewTransactions';
 import Dashboard from './Components/Dashboard';
-import Login from './Components/Login/Login';
+import Login from './Components/Login';
+import Register from './Components/Login/Register';
 
 
 function App() {
@@ -29,9 +30,13 @@ function App() {
 
   return (
     <div className="App">
-      <Login></Login>
       <Menu active={active}  setActive={setActive}/> 
       {displayData()}
+      <div login__container> 
+      <Register />
+      <Login />
+      </div>
+      
     </div>
   );
 }

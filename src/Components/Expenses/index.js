@@ -43,9 +43,9 @@ const FormExpense = () => {
         <Form.Group>
             <Form.Control  className='date' type='date' {...register('date')} />
         </Form.Group>
-        <Form.Group className='select__option__expense' {...register('options')}>
+        <Form.Group className='select__category__expense' {...register('category')}>
         <Form.Select>
-            <option>Select option</option>
+            <option>Select category</option>
             <option value='1'>Education</option>
             <option value='2'>Groceries</option>
             <option value='3'>Health</option>
@@ -59,7 +59,7 @@ const FormExpense = () => {
         <Form.Group>
             <Form.Control className='amount' as='textarea' placeholder='Add description' {...register('description')}/>
         </Form.Group> <br/>
-        <Button onClick={addExpense} className='button__add' variant="outline-primary">Add Expense</Button>
+        <Button onClick={() => addExpense(register)} className='button__add' variant="outline-primary">Add Expense</Button>
     </Form>
     </div>
   )

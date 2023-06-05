@@ -7,7 +7,7 @@ import axios from 'axios';
 const Register = () => {
 
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
+    // const [name, setName] = useState('');
     const [password, setPasword] = useState('');
     const [error, setError] = useState('')
     const [selectedGender, setSelectedGender] = useState('');
@@ -20,7 +20,7 @@ const Register = () => {
     const  AuthRegister = async () => {
         try{
           const response = await axios.post('https://localhost:5000/register', {email, password})
-        }catch (error) {
+        }catch ({error}) {
           console.log('This is error', error)
           setError(error.response.data.result)
         }

@@ -11,7 +11,7 @@ import Register from './Components/Login/Register';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './Components/NotFoundPage/NotFoundPage';
 
-//  AÑADIR ROUTER REACT DOM 
+
 function App() {
 
   return (

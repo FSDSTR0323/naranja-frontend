@@ -20,7 +20,7 @@ const Register = () => {
         password:''
     }
    
-// cambiar name a firstName 
+// CAMBIAR NAME A FIRSTNAME ******************************
     const onValidate = (form) => {
         let isError = false;
         let errors = {};
@@ -78,6 +78,7 @@ const Register = () => {
           console.log('This is error', errors)
         }
       }
+        // LOGIN Y REGISTER TENER SU URL 
  
     return (
         <div className='form__register'>

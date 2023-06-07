@@ -3,17 +3,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import '../Menu/style.css'
+import { NavLink } from 'react-router-dom';
 
 
 
-const Menu = ({active, setActive}) => {
-
-  const handleExpenseClick = () => {
-    setActive(true);
-  };
+const Menu = () => {
 
   return (
-    
    <>
    
    <div className='d-flexMenu'>
@@ -21,10 +17,10 @@ const Menu = ({active, setActive}) => {
     <Container>
       <Navbar.Brand>Orange Tracker</Navbar.Brand>
       <Nav className='me-auto'>
-          <Nav.Link id='1' className={active === 1 ? 'active': ''} onClick={() => setActive(1)} >Dashboard</Nav.Link> 
-          <Nav.Link id='2' className={active === 2 ? 'active': ''} onClick={() => setActive(2)}>Expenses</Nav.Link>
-          <Nav.Link id='3' className={active === 3 ? 'active': ''} onClick={() => setActive(3)} >Incomes</Nav.Link>
-          <Nav.Link id='4' className={active === 4 ? 'active': ''} onClick={() => setActive(4)}>View Transactions</Nav.Link>
+          <Nav.Link> <NavLink to='/dashboard'>Dashboard</NavLink></Nav.Link> 
+          <Nav.Link> <NavLink to='/expenses'>Expenses</NavLink></Nav.Link> 
+          <Nav.Link> <NavLink to='/incomes'>Incomes</NavLink></Nav.Link> 
+          <Nav.Link> <NavLink to='/viewTransactions'>View Transactions</NavLink></Nav.Link> 
       </Nav>
     </Container>
    </Navbar>

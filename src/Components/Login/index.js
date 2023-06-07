@@ -14,16 +14,14 @@ const Login = () => {
 
   const  AuthLogin = async () => {
     try{
-      const response = await axios.post('https://localhost:5000/login', {email, password})
-      const token = response.data.token;
-      window.localStorage.setItem('token', token);
+      await axios.post('http://localhost:5000/login', {email, password})
+      // const token = response.data.token;
+      // window.localStorage.setItem('token', token);
     }catch (error) {
       console.log('This is error', error)
-      setError(error.response.data.result)
+      setError(error)
     }
   }
-
-// CONTINUAR VIENDO CLASE DE LOGIN MINUTO:  1:26 
   return (
     <Container id="main-container" className="container__login">
     <Form id="sign-in-form" className="text-center p-4 w-100">
@@ -39,6 +37,7 @@ const Login = () => {
       </Form.Group>
       <Form.Group className="d-flex justify-content-center mb-4" controlId="remember-me">
         <Form.Check label="Remember me"/>
+        {/* <Form.Check label="******Eres nuevo aqui?"/> */}
       </Form.Group>
       <div className="d-grid">
         <Button onClick={AuthLogin} variant="primary" size="lg" className='btn__signIn'>Sign In</Button>

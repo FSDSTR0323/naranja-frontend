@@ -1,0 +1,65 @@
+
+.register__container{
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid  #d08400; */
+    margin-top: 3em;
+    margin-bottom: 7em;
+    padding: 1em;
+}
+
+.text-danger {
+    color: #f7a20e !important;
+    margin: 0 !important;
+    margin-right: 10em !important;
+}
+
+
+.container {
+    max-width: 600px;
+}
+
+.custom__form__register {
+    display: grid;
+    gap: .3em;
+    width: 25em;
+}
+
+.register__title {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ffd080;
+    color: #f7a20e;
+    font-weight: bold !important;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.msg__create__account {
+    text-align: center;
+    margin-top: 1em;
+    color: #00000063;
+}
+
+.gender {
+    margin-left: 2em;
+}
+
+.btn__register {
+    color: #fff;
+    background: #f7a20e;
+    border: none;
+  }
+  .btn__register:hover {
+    background: #ffbe4d;
+  }
+  .btn__register:active  {
+    background: #d8bf92;
+  }
+
+.signin__register{
+    color: #ffbe4d;
+  }
+  .signin__register:hover {
+    color: #d8bf92;
+  }

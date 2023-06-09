@@ -16,10 +16,6 @@ const useForm = (initialData, onValidate) => {
         });
     };
 
-    
-
-
-  
     const handleSubmit = (event) => {
         event.preventDefault()
         const err = onValidate(form)

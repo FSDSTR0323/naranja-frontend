@@ -4,7 +4,7 @@ const NotFoundPage = () => {
   return (
     <div>
       <h1>Page not found</h1>
-      <p>No existe la URL introducida</p>
+      <p>Added URL does not exist</p>
     </div>
   );
 };

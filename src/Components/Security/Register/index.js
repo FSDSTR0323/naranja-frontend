@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Container, Form} from 'react-bootstrap';
-import '../Register/Register.css'
+import './Register.css'
 import axios from 'axios';
 import useForm from '../../hooks/useForm';
-import { useFormState } from 'react-hook-form';
 
 const Register = () => {
 
@@ -74,11 +73,11 @@ const Register = () => {
     const  AuthRegister = async () => {
         try{
           await axios.post('http://localhost:5000/register', {email, password})
+          window.location.href = '/dashboard';
         }catch ({errors}) {
           console.log('This is error', errors)
         }
       }
-        // LOGIN Y REGISTER TENER SU URL 
  
     return (
         <div className='form__register'>
@@ -88,7 +87,8 @@ const Register = () => {
                 {/* <img className="mb-3 register__logo" 
                 src="https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_081-account-user-profile-avatar-512.png" 
                 alt="Bootstrap 5"/> */}
-                <h1 className="mb-1 fs-2 fw-normal register__title">Register</h1>
+                <h1 className="mb-1 fs-2 fw-normal register__title">Register</h1> 
+                <p className='msg__create__account'>Create your account. It's free and only takes a minute.</p>
             </div>
             <Form.Group className="mb-1">
                 <Form.Label className='text-danger' >* Name:</Form.Label>
@@ -140,7 +140,8 @@ const Register = () => {
                 {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
             </Form.Group>
 
-            <Button type='submit' onClick={AuthRegister} className='btn__register' size='lg'  variant="outline-primary">Sign Up</Button>
+            <Button type='submit' onClick={AuthRegister} className='btn__register' size='lg'  variant="outline-primary">Register Now</Button>
+            <Form.Text className='msg__create__account'>Already have an account? <a className='signin__register' href='/'>Sign in</a></Form.Text>
         </Form>
         </Container>
         </div>

@@ -1,11 +1,11 @@
 .container__login {
     display: flex;
     justify-content: center;
-    margin-top: 8em;
+    margin-top: 5em;
 }
 
 #sign-in-form {
-    max-width: 330px;
+    max-width: 500px;
   }
   
   .bootstrap-logo {
@@ -30,6 +30,11 @@
   }
   .btn__signIn:active  {
     background: #d8bf92;
+  }
+
+  .create__account {
+    color: #f7a20e !important;
+    text-decoration:none;
   }
 
   

@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap'
 import '../Incomes/style.css';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
+import Menu from '../Menu';
 
 
 const FormIncome = () => {
@@ -24,6 +25,7 @@ const FormIncome = () => {
 
   return (
     <div className='main__container'>
+        <Menu/>
         <div className='title_income'>
             <h2>Incomes</h2>
         </div>

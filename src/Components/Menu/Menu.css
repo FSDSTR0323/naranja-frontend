@@ -1,0 +1,18 @@
+
+
+
+
+.title__app {
+    color: #f7a20e !important ;
+    text-align: start;
+    font-weight: bold;
+}
+
+.routes{
+    color: #f7a20e;
+    text-decoration: none;
+}
+
+.routes:hover{
+    color: #d8bf92;
+}

@@ -1,0 +1,7 @@
+
+
+.history__container{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5em;
+}

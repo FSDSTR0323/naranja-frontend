@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap'
 import '../Expenses/style.css';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-
+import Menu from '../Menu/index'
 
 const FormExpense = () => {
     const {register, handleSubmit} = useForm();
@@ -23,7 +23,8 @@ const FormExpense = () => {
 
 
   return (
-    <div className='main__container'>
+    <div className='expense__container'>
+        <Menu/>
         <div className='title_expense'>
             <h2>Expenses</h2>
         </div>

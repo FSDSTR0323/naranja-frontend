@@ -6,19 +6,21 @@ import axios from 'axios';
 
 const Login = () => {
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
 
   const [email, setEmail] = useState('');
   const [password, setPasword] = useState('');
 
   const  AuthLogin = async () => {
     try{
-      await axios.post('http://localhost:5000/login', {email, password})
-      // const token = response.data.token;
-      // window.localStorage.setItem('token', token);
+      const response = await axios.post('http://localhost:5000/login', {email, password})
+      console.log('vemos response', response)
+      //Autentification
+      const token = response.data.token;
+      window.localStorage.setItem('token', token);
     }catch (error) {
       console.log('This is error', error)
-      setError(error)
+      setError(error.response.data.error)
     }
   }
   return (

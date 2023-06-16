@@ -1,25 +1,44 @@
 
-h1 {
-    margin-left: 1em;
-}
-
 .dashboard__container {
     display: flex;
     flex-direction: column;
     margin: 5em;
     margin-top: 7em;
-    border: 3px solid rgb(0, 0, 0);
+    border: 3px solid rgb(180, 180, 180);
     border-radius: 10px;
 }
 
+.title__all__transactions {
+    margin: .5em;
+    padding: .5em;
+    color: #f7a20e;
+}
+
+.balance__title{
+    color: rgba(103, 103, 103, 0.733);
+    /* font-weight: bold; */
+    margin-left: 6.3em;
+    
+}
+.balance{
+    display: inline-block;
+    background: #efeded63;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+    margin-left: 2em;
+    width: 500px;
+}
+
 .chart__container {
-    border: 1px solid #000;
     border-radius: 5px;
     padding: 1em;
-    margin: 1em;
     max-width: 800px;
+    height: auto;
+    width: auto;
 }
 
 .amount__container{
     margin-left: 2em;
+    color:#ffbe4d ;
 }

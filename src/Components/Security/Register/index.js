@@ -6,9 +6,10 @@ import useForm from '../../hooks/useForm';
 
 const Register = () => {
 
+    const [error, setError] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPasword] = useState('');
-    const [error, setError] = useState('');
+    
 
     const initialData = {
         name: '',
@@ -20,6 +21,7 @@ const Register = () => {
     }
    
 // CAMBIAR NAME A FIRSTNAME ******************************
+
     const onValidate = (form) => {
         let isError = false;
         let errors = {};
@@ -75,9 +77,10 @@ const Register = () => {
         try{
          const response = await axios.post('http://localhost:5000/register', {email, password})
           // window.location.href = '/dashboard';
-        }catch ({errors}) {
-          console.log('This is error', errors)
-          // setError(error.response.data.error)
+          console.log('vemos response', response)
+        }catch (error) {
+          console.log('This is error', error)
+          setError(error.response.data.error)
         }
       }
  
@@ -142,7 +145,9 @@ const Register = () => {
                 {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
             </Form.Group>
 
+            
             <Button type='submit' onClick={AuthRegister} className='btn__register' size='lg'  variant="outline-primary">Register Now</Button>
+            {error &&  <p id='err__msg'>{error}</p>}
             <Form.Text className='msg__create__account'>Already have an account? <a className='signin__register' href='/'>Sign in</a></Form.Text>
         </Form>
         </Container>

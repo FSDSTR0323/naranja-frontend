@@ -11,7 +11,11 @@ const Dashboard = () => {
     <>
       <Menu/>
       <div className='dashboard__container'>
-      <h1>All transactions</h1>
+      <h2 className='title__all__transactions'>All transactions</h2>
+      <div className='total__salary'>
+        <p className='balance__title'>Balance</p>
+        <input type='text' value={'178,69$'} className='balance' disabled></input>
+      </div>
       <div className='history__container'>
           <History/>
         </div>

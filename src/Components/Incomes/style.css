@@ -3,12 +3,17 @@
     display: flex;
     flex-direction: column;
     margin: 5em;
-    border: 3px solid rgb(0, 0, 0);
+    margin-top: 7em;
+    border: 3px solid rgb(180, 180, 180);
     border-radius: 10px;
 }
 .title_income {
     margin: 1em;
     padding: 1em;
+    color: #f7a20e;
+}
+.title__label__income {
+    color: #f7a20e;
 }
 
 .total__income {
@@ -29,9 +34,18 @@
     margin-top: 2em;
 }
 
-.button__add {
+#button__add {
     margin-left: 8em;
+    color: #fff;
+    background: #f7a20e;
+    border: none;
 }
+#button__add:hover {
+    background: #ffbe4d;
+  }
+#button__add:active  {
+    background: #d8bf92;
+  }
 
 .amount {
     margin-top: 2em;

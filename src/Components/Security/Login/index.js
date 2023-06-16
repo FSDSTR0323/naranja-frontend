@@ -45,7 +45,7 @@ const Login = () => {
       <div className='d-grid'>
         <Button onClick={AuthLogin} variant='primary' size='lg' className='btn__signIn'>Sign In</Button>
       </div>
-      {error &&  <p>{error}</p>}
+      {error &&  <p id='err__msg'>{error}</p>}
       <p className='mt-5 text-muted'>&copy; 2022-2023</p>
     </Form>
   </Container>

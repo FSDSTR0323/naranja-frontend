@@ -2,6 +2,8 @@
 
 .history__container{
     display: flex;
-    justify-content: flex-end;
-    margin-right: 5em;
+    flex-direction: column;
+    text-align: end;
+    margin-right: 100px;
+    color: #ffbe4d;
 }

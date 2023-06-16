@@ -24,8 +24,10 @@ const FormIncome = () => {
 
 
   return (
+    <>
+     <Menu/>
     <div className='main__container'>
-        <Menu/>
+       
         <div className='title_income'>
             <h2>Incomes</h2>
         </div>
@@ -36,7 +38,7 @@ const FormIncome = () => {
     
     <Form onSubmit={handleSubmit(onSubmit)} className='custom__form__income'>
         <Form.Group>
-            <Form.Label>Title Income:</Form.Label>
+            <Form.Label className='title__label__income'>Title Income:</Form.Label>
             <Form.Control required className='add__income' type='text' placeholder='Add Income' {...register('income', {required:true})} />
         </Form.Group>
         <Form.Group>
@@ -61,9 +63,10 @@ const FormIncome = () => {
         <Form.Group>
             <Form.Control className='amount' as='textarea' placeholder='Add description' {...register('description')}/>
         </Form.Group> <br/>
-        <Button type='submit' onClick={addIncome} className='button__add' variant="outline-primary">Add Income</Button>
+        <Button type='submit' onClick={addIncome} id='button__add' variant="outline-primary">Add Income</Button>
     </Form>
     </div>
+    </>
   )
 }
 

@@ -23,19 +23,27 @@ const FormExpense = () => {
 
 
   return (
+    
+    
+    <>
+      <Menu/>
+      <span className='border__animation'> 
     <div className='expense__container'>
-        <Menu/>
+     
+    
+    
+        
+
         <div className='title_expense'>
             <h2>Expenses</h2>
         </div>
-
         <div className='total__expense'>
         <Form.Control as='input'  size='lg' disabled readOnly/>
         </div>
-    
+       {/* ARREGLAR ANIMACION BORDES*********** */}
     <Form onSubmit={handleSubmit(onSubmit)} className='custom__form__expense'>
         <Form.Group>
-            <Form.Label>Title Expense:</Form.Label>
+            <Form.Label className='title__label__expense'>Title Expense:</Form.Label>
             <Form.Control required className='add__expense' type='text' placeholder='Add Expense' {...register('expense', {required:true})} />
         </Form.Group>
         <Form.Group>
@@ -60,9 +68,16 @@ const FormExpense = () => {
         <Form.Group>
             <Form.Control className='amount' as='textarea' placeholder='Add description' {...register('description')}/>
         </Form.Group> <br/>
-        <Button onClick={() => addExpense(register)} className='button__add' variant="outline-primary">Add Expense</Button>
+        <Button type='submit' onClick={() => addExpense(register)} id='button__add' variant="outline-primary">Add Expense</Button>
     </Form>
-    </div>
+    
+    <span></span>
+    
+   </div>
+   </span>
+    </>
+    
+   
   )
 }
 

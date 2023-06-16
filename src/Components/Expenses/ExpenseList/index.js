@@ -4,7 +4,7 @@ import { Button, Form, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 const ExpenseList = () => {
 
-    const ExpenseCard = ({title, amount, date, category, description }) => (
+    const ExpenseCard = ({title, amount, date, category, description}) => (
         
         <div className='expenseList__container'>
         <ListGroup as={'ul'}>

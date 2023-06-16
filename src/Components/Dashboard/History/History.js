@@ -4,7 +4,7 @@ import history from '../History/History.css'
 const History = () => {
   return (
     <div className='history__container'>
-      <h2>Recent History</h2>
+      <h3>Recent History</h3>
     </div>
   )
 }

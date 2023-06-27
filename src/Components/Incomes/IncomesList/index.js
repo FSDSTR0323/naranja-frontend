@@ -1,44 +1,58 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button, Form, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import '../IncomesList/IncomeList.css'
 
-const IncomeList = () => {
+const IncomeList = ({refresh}) => {
 
-    const IncomeCard = ({title, amount, date, category, description }) => (
+    const [incomeList, setIncomeList] = useState([])
+
+    const incomesGetter = async ()=> {
+        try {
+            const {data} = await axios.get('http://localhost:5000/api/v1/get-income');
+            setIncomeList(data); 
+        }catch ( error ){
+            console.log('Error get Income', error)
+        }
+    };   
+
+    const handleDeleteIncome = async (_id) => {
+        try {
+            await axios.delete(`http://localhost:5000/api/v1/delete-income/${_id}`);
+            incomesGetter()
+        } catch (error){
+            console.log(error)
+        }
+    }
+    
+    useEffect(()=>{
+        incomesGetter()
+    },[refresh]) 
+     
+
+    const IncomeCard = ({title, amount, date, category, description, _id }) => (
         
         <div className='incomeList__container'>
-        <ListGroup as={'ul'}>
-            {/* AÑADIR ICONO EN REFERENCIA A LA OPCIÓN DEL GASTO  */}
-            <ListGroupItem as={'li'}>{title}</ListGroupItem>
-            <ListGroupItem as={'li'}>{amount}</ListGroupItem>
-            <ListGroupItem as={'li'}>{date}</ListGroupItem>
-            <ListGroupItem as={'li'}>{category}</ListGroupItem>
-            <ListGroupItem as={'li'}>{description}</ListGroupItem>
-            <Button type='submit' className='dltIncome'>Delete</Button>
-        </ListGroup>
+            <div id='items__incomes'>
+                    <div className='icon'>
+                    </div>
+                    <h5>{title}</h5>
+                    <p>{amount}</p>
+                    <date>{date}</date>
+                    <p>{category}</p>
+                    <p>{description}</p>
+                    <Button type='submit' id='dltIncome' onClick={()=> handleDeleteIncome(_id)}>Delete</Button>
+            </div>
+        
         </div>
     )
 
-        const [incomeList, setIncomeList] = useState([])
-
-       
-    const incomesGetter = async ()=> {
-        const {data} = await axios.get('http://localhost:5000/');
-        setIncomeList(data); // Nos podriamos quedar solo con data pasandolo como objeto en el await pero asi me parece más sencillo de entender.
-    };   
-
-    useEffect(()=>{
-            incomesGetter()
-        },[]) 
-   
-
+  
   return (
+
     <div className='income_card'>
-      <Form.Control>
-        {incomeList.map(income => <IncomeCard key={income.id} title={income.title} amount={income.amount} date={income.date} category={income.category} description={income.description} > </IncomeCard>)}
-      </Form.Control>
+        {incomeList.map(income => <IncomeCard key={income._id} _id={income._id} title={income.title} amount={income.amount} date={income.date} category={income.category} description={income.description} > </IncomeCard>)}      
     </div>
 )}
-
 
 export default IncomeList

@@ -1,11 +1,23 @@
 
+
 .main__container {
+    background: #ffffffae;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    margin: 5em;
-    margin-top: 7em;
-    border: 3px solid rgb(180, 180, 180);
+    flex-wrap: wrap;
+    flex: 1;
+    /* border: 3px solid rgb(180, 180, 180); */
     border-radius: 10px;
+    overflow: auto;
+    margin: 3em;
+}
+
+
+#form__container__income {
+    display: flex;
+    flex-wrap: wrap;
+
 }
 .title_income {
     margin: 1em;
@@ -17,28 +29,31 @@
 }
 
 .total__income {
+    display: flex;
+    flex-wrap: wrap;
     padding: 1em;
-    max-width: 100vw;
+    width: 100%;
 }
 
 .custom__form__income  {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     margin: 2em;
-    margin-top: 2em;
-    width: 25vw;
+    width: 25rem;
 }
 
 .select__category__income  {
     cursor: pointer;
-    width: 10vw;
-    margin-left: 14.5em;
+    width: 10rem;
     margin-top: 2em;
 }
 
 #button__add {
-    margin-left: 8em;
     color: #fff;
     background: #f7a20e;
     border: none;
+    margin-right: 8em;
 }
 #button__add:hover {
     background: #ffbe4d;
@@ -53,4 +68,11 @@
 
 .date {
     margin-top: 2em;
+}
+
+#income__list__container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3em;
+    width: 800px;
 }

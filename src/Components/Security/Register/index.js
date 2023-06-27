@@ -6,10 +6,14 @@ import useForm from '../../hooks/useForm';
 
 const Register = () => {
 
+    const [name, setName] = useState('');
+    const [surName, setSurname] = useState('');
+    const [birthdate, setBirthdate] = useState('');
+    const [gender, setGender] = useState('');
     const [error, setError] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPasword] = useState('');
-    
+    const [password, setPassword] = useState('');
+ 
 
     const initialData = {
         name: '',
@@ -20,7 +24,6 @@ const Register = () => {
         password:''
     }
    
-// CAMBIAR NAME A FIRSTNAME ******************************
 
     const onValidate = (form) => {
         let isError = false;
@@ -69,55 +72,52 @@ const Register = () => {
           return isError ? errors : null
         }
 
-        const{form, errors, loading, handleChange, handleSubmit} = useForm(initialData, onValidate)
+        const {form, errors, loading, handleChange, handleSubmit} = useForm(initialData, onValidate)
 
 
     const  AuthRegister = async () => {
 
         try{
-         const response = await axios.post('http://localhost:5000/register', {email, password})
+         const response = await axios.post('http://localhost:5000/register', {email, password, name, surName, gender, birthdate })
           // window.location.href = '/dashboard';
-          console.log('vemos response', response)
         }catch (error) {
-          console.log('This is error', error)
           setError(error.response.data.error)
         }
       }
- 
+      
+
+
     return (
         <div className='form__register'>
         <Container className='register__container'>
         <Form className='custom__form__register' noValidate onSubmit={handleSubmit}>
             <div className='avatar__register__title'>
-                {/* <img className="mb-3 register__logo" 
-                src="https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_081-account-user-profile-avatar-512.png" 
-                alt="Bootstrap 5"/> */}
                 <h1 className="mb-1 fs-2 fw-normal register__title">Register</h1> 
                 <p className='msg__create__account'>Create your account. It's free and only takes a minute.</p>
             </div>
             <Form.Group className="mb-1">
                 <Form.Label className='text-danger' >* Name:</Form.Label>
-                <Form.Control required value={form.name} name='name' onChange={handleChange} className='name' type='text' size="lg" /> 
+                <Form.Control required  name='name' onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size="lg" /> 
                 {errors.name && <div className="alert alert-warning p-1">{errors.name}</div>}
             </Form.Group>
 
             <Form.Group className="mb-1">
                 <Form.Label  className='text-danger'>* Surname:</Form.Label>
-                <Form.Control required className='surName' value={form.surName} name='surName' onChange={handleChange} type='text' size="lg" />
+                <Form.Control required className='surName'  onChange={e => setSurname(e.currentTarget.value)} name='surName' type='text' size="lg" />
                 {errors.surName && <div className="alert alert-warning p-1">{errors.surName}</div>}
             </Form.Group>
 
             <Form.Group>
                 <Form.Label  className='text-danger'>* Add your birthdate:</Form.Label>
-                <Form.Control size='lg' required className='birthdate' type='date' value={form.birthdate} name='birthdate' onChange={handleChange}/>
+                <Form.Control size='lg' required className='birthdate' onChange={e => setBirthdate(e.currentTarget.value)} type='date' name='birthdate' />
                 {errors.birthdate && <div className="alert alert-warning p-1">{errors.birthdate}</div>}
             </Form.Group>
 
             <Form.Group>
             <Form.Label  className='text-danger'>* Select gender:</Form.Label>
-                <Form.Check label="Male"  value='male' size='lg' required className='gender' name='gender' type='radio'/>
-                <Form.Check label="Female"  value='female' size='lg' required className='gender' name='gender' type='radio' />
-                <Form.Check label="Other"  value='other' size='lg' required className='gender' name='gender' type='radio' />
+                <Form.Check label="Male" onChange={e => setGender(e.currentTarget.value)} value='male' size='lg' required className='gender' name='gender' type='radio'/>
+                <Form.Check label="Female" onChange={e => setGender(e.currentTarget.value)} value='female' size='lg' required className='gender' name='gender' type='radio' />
+                <Form.Check label="Other" onChange={e => setGender(e.currentTarget.value)} value='other' size='lg' required className='gender' name='gender' type='radio' />
                 {errors.gender && <div className="alert alert-warning p-1">{errors.gender}</div>}
             </Form.Group>
 
@@ -135,13 +135,13 @@ const Register = () => {
 
             <Form.Group className="mb-1" controlId="register__password">
                 <Form.Label  className="text-danger">* Password:</Form.Label>
-                <Form.Control required value={form.password} type="password" size="lg" className="position-relative" name='password' autoComplete="new-password" onChange={handleChange}/>
+                <Form.Control required value={form.password} type="password" size="lg"  className="position-relative" name='password' autoComplete="new-password" onChange={handleChange}/>
                 {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
             </Form.Group>
 
             <Form.Group className="mb-4" controlId="register__confirm__password">
                 <Form.Label  className="text-danger">* Confirm password:</Form.Label>
-                <Form.Control required value={password} onChange={e => setPasword(e.currentTarget.value)} type="password" size="lg"  name='password' autoComplete="new-password" className="position-relative" />
+                <Form.Control required value={password}  type="password" size="lg" onChange={e => setPassword(e.currentTarget.value)} name='password' autoComplete="new-password" className="position-relative" />
                 {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
             </Form.Group>
 

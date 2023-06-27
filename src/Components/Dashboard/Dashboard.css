@@ -2,9 +2,9 @@
 .dashboard__container {
     display: flex;
     flex-direction: column;
-    margin: 5em;
-    margin-top: 7em;
-    border: 3px solid rgb(180, 180, 180);
+    margin: 3em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: #ffffffae;
     border-radius: 10px;
 }
 

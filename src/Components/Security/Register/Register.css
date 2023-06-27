@@ -2,11 +2,8 @@
 
 .register__container{
     display: flex;
-    justify-content: center;
-    /* border: 1px solid  #d08400; */
-    margin-top: 3em;
-    margin-bottom: 7em;
-    padding: 1em;
+    justify-content: center; 
+ 
 }
 
 .text-danger {
@@ -21,6 +18,10 @@
     display: grid;
     gap: .3em;
     width: 25em;
+    margin-top: 3em;
+    margin-bottom: 7em;
+    padding: 1em;
+    
 }
 
 .register__title {
@@ -31,6 +32,7 @@
     font-weight: bold !important;
     flex-direction: column;
     padding-bottom: 10px;
+    
 }
 
 .msg__create__account {
@@ -61,8 +63,6 @@
   .signin__register:hover {
     color: #d8bf92;
   }
-
-
 
   #err__msg{
     color: rgba(255, 0, 0, 0.692);

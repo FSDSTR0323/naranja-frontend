@@ -1,14 +1,14 @@
 
 .expense__container {
     display: flex;
-    flex-direction: column;
-    margin: 5em;
-    margin-top: 7em;
-    border: 3px solid rgb(180, 180, 180);
+    background: #ffffffae;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    flex-direction: column;
+    margin: 3em;
     overflow: hidden;
 }
-.border__animation {
+/* .border__animation {
     align-items: center;
     position: relative;
     display: flex;
@@ -49,7 +49,7 @@
     border: 16px;
     background-color: #ffffff;
     z-index: 1;
-}
+} */
 .title_expense {
     margin: 1em;
     padding: 1em;
@@ -72,8 +72,7 @@
 
 .select__category__expense {
     cursor: pointer;
-    width: 10vw;
-    margin-left: 14.5em;
+    width: 10rem;
     margin-top: 2em;
 }
 

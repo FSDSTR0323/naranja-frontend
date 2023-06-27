@@ -3,6 +3,18 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 const ExpenseList = () => {
+    
+    const [expenseList, setExpenseList] = useState([])
+
+    const expenseGetter = async () => {
+        // AÑADIR LA RUTA GET PARA REFRESCAR AL ADD GASTO
+        const {data} = await axios.get('');
+        setExpenseList(data);
+    };
+
+    useEffect(() => {
+        expenseGetter()
+    },[])
 
     const ExpenseCard = ({title, amount, date, category, description}) => (
         
@@ -19,17 +31,7 @@ const ExpenseList = () => {
         </div>
     )
 
-        const [expenseList, setExpenseList] = useState([])
 
-        const expenseGetter = async () => {
-            // AÑADIR LA RUTA GET PARA REFRESCAR AL ADD GASTO
-            const {data} = await axios.get('');
-            setExpenseList(data);
-        };
-
-        useEffect(() => {
-            expenseGetter()
-        },[])
    
 
   return (

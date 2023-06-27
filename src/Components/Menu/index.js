@@ -13,9 +13,12 @@ const Menu = () => {
   <div className='menu__container'>
       <Navbar className='menu'>
         <div className='img__profile'>
-          <img id='user__avatar' 
-          src='https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_081-account-user-profile-avatar-512.png' 
-          alt='Bootstrap 5'/>
+          <NavLink className='routes' to='/profile'>
+            <img id='user__avatar' 
+            className='routes' to='/profile'
+            src='https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_081-account-user-profile-avatar-512.png' 
+            alt='Bootstrap 5'/>
+          </NavLink>
         </div>
         <Navbar.Brand  as='h1' id='title__app'> <NavLink className='route__title' to='/dashboard'>Orange Tracker</NavLink></Navbar.Brand>
       <Nav>

@@ -19,8 +19,10 @@ const FormIncome = () => {
 //sustituir peticiones***
     const addIncome = async () => {
         try {
-            await axios.post(process.env('BACKEND_URL')+'/api/v1/add-income', {title, amount, description, category, date});
+            await axios.post('http://localhost:5000/api/v1/add-income', {title, amount, description, category, date});
+            console.log("esto es title", title)
             toggle(!refresh)
+            
         } catch (error) {
             console.error('Error create Income', error)
         }

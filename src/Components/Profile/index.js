@@ -4,6 +4,11 @@ import Menu from '../Menu';
 import '../Profile/Profile.css'
 import axios from 'axios';
 import useForm from '../hooks/useForm';
+import jwt_decode from 'jwt-decode';
+const jwtSecret = process.env.JWT_SECRET;
+
+const token = window.localStorage.getItem("token");
+ 
 
 
 const Profile = ({refresh}) => {
@@ -58,40 +63,40 @@ const Profile = ({refresh}) => {
         // let regexCountry = '';
         // let regexPostCode = '';
 
-        if (!form.name.trim()) {
-            errors.name = 'The "Name" field must not be empty.'
-            isError = true;
-          } else if (!regexName.test(form.name)){
-            errors.name = 'The "Name" field only accepts letters and numbers.'
-          }
+        // if (!form.name.trim()) {
+        //     errors.name = 'The "Name" field must not be empty.'
+        //     isError = true;
+        //   } else if (!regexName.test(form.name)){
+        //     errors.name = 'The "Name" field only accepts letters and numbers.'
+        //   }
 
-          if (!form.surName.trim()) {
-            errors.surName = 'The "surname" field must not be empty.'
-            isError = true;
-          } else if (!regexsurName.test(form.surName)){
-            errors.surName = 'The "surName" field only accepts letters and numbers.'
-          }
+        //   if (!form.surName.trim()) {
+        //     errors.surName = 'The "surname" field must not be empty.'
+        //     isError = true;
+        //   } else if (!regexsurName.test(form.surName)){
+        //     errors.surName = 'The "surName" field only accepts letters and numbers.'
+        //   }
 
-          if (!form.birthdate.trim()) {
-            errors.birthdate = 'The "birthdate" field must not be empty.'
-            isError = true;
-          } else if (!regexBirthdate.test(form.birthdate)){
-            errors.birthdate = 'You must be of legal age.'
-          }
+        //   if (!form.birthdate.trim()) {
+        //     errors.birthdate = 'The "birthdate" field must not be empty.'
+        //     isError = true;
+        //   } else if (!regexBirthdate.test(form.birthdate)){
+        //     errors.birthdate = 'You must be of legal age.'
+        //   }
 
-          if (!form.email.trim()) {
-            errors.email = 'The "email" field must not be empty.'
-            isError = true;
-          } else if (!regexEmail.test(form.email)){
-            errors.email = 'email field must be formatted as "@" email'
-          }
+        //   if (!form.email.trim()) {
+        //     errors.email = 'The "email" field must not be empty.'
+        //     isError = true;
+        //   } else if (!regexEmail.test(form.email)){
+        //     errors.email = 'email field must be formatted as "@" email'
+        //   }
       
-          if (!form.password.trim()) {
-            errors.password = 'The "password" field must not be empty.'
-            isError = true;
-          } else if (!regexPassword.test(form.password)){
-            errors.password = 'The field "password" is not valid, it must contain at least one capital letter, one number and a minimum of 8 characters'
-          }
+        //   if (!form.password.trim()) {
+        //     errors.password = 'The "password" field must not be empty.'
+        //     isError = true;
+        //   } else if (!regexPassword.test(form.password)){
+        //     errors.password = 'The field "password" is not valid, it must contain at least one capital letter, one number and a minimum of 8 characters'
+        //   }
       
           return isError ? errors : null
         }
@@ -100,9 +105,13 @@ const Profile = ({refresh}) => {
 
 
     const  updateUser = async () => {
-    
+            
+        const decoded = jwt_decode(token, jwtSecret);
+        var userId = decoded.id
+       console.log(userId)
+
         try{
-            const {data} = await axios.post('http://localhost:5000/register', {image, name, surName, birthdate, gender, email, phone, address, number, city, country, postCode })
+            const {data} = await axios.post(`http://localhost:5000/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image })
           // window.location.href = '/dashboard';
           setUserList(data)
         }catch (error) {
@@ -128,14 +137,17 @@ const Profile = ({refresh}) => {
 
 // Traer datos del back
     const avatarGetter = async (_id)=> {
+        const decoded = jwt_decode(token, jwtSecret);
+        var userId = decoded.id
+       console.log(userId)
         try {
-            const {data} = await axios.get(`http://localhost:5000/user/${_id}`);
+            const {data} = await axios.get(`http://localhost:5000/user/${userId}`); // email, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image
             setUserList(data); 
         }catch ( error ){
             console.log('Error get Income', error)
         }
     };   
-        
+
 
     return (
         <>

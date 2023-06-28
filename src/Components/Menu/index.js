@@ -4,7 +4,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import '../Menu/Menu.css'
 import { NavLink } from 'react-router-dom';
 
-
+    // Logout
+    const logout = () => {
+      localStorage.removeItem('token')
+  }
 
 const Menu = () => {
 
@@ -26,7 +29,7 @@ const Menu = () => {
           <Nav.Link><NavLink className='routes' to='/expenses'>Expenses</NavLink></Nav.Link> 
           <Nav.Link><NavLink className='routes' to='/incomes'>Incomes</NavLink></Nav.Link> 
           <Nav.Link><NavLink className='routes' to='/viewTransactions'>View Transactions</NavLink></Nav.Link> 
-          <Nav.Link><NavLink className='routes' to='/'>Sing Out</NavLink></Nav.Link> 
+          <Nav.Link><NavLink className='routes' to='/' onClick={logout}>Sing Out</NavLink></Nav.Link> 
       </Nav>
       </Navbar>
   </div>

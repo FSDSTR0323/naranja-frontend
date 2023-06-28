@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Container, Form, Navbar} from 'react-bootstrap'
 import './Login.css'
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -12,16 +13,25 @@ const Login = () => {
   const [password, setPasword] = useState('');
 
   const  AuthLogin = async () => {
+   
     try{
       const response = await axios.post('http://localhost:5000/login', {email, password})
       console.log('vemos response', response)
       //Autentification
       const token = response.data.token;
       window.localStorage.setItem('token', token);
+      
     }catch (error) {
       console.log('This is error', error)
       setError(error.response.data.error)
     }
+      
+  }
+  const navigate = useNavigate();
+ async function handleClick(){
+    await AuthLogin()
+    navigate("/dashboard")
+    
   }
   return (
     <Container id='main-container' className='container__login'>
@@ -43,7 +53,7 @@ const Login = () => {
           <Navbar.Text ><a className='create__account' href='/register'>Create Account</a></Navbar.Text>
       </Form.Group>
       <div className='d-grid'>
-        <Button onClick={AuthLogin} variant='primary' size='lg' className='btn__signIn'>Sign In</Button>
+        <Button onClick={handleClick} variant='primary' size='lg' className='btn__signIn'>Sign In</Button>
       </div>
       {error &&  <p id='err__msg'>{error}</p>}
       <p className='mt-5 text-muted'>&copy; 2023-2023</p>

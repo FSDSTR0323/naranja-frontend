@@ -3,7 +3,7 @@ import { Button, Container, Form} from 'react-bootstrap';
 import './Register.css'
 import axios from 'axios';
 import useForm from '../../hooks/useForm';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
@@ -73,7 +73,7 @@ const Register = () => {
           return isError ? errors : null
         }
 
-        const {form, errors, loading, handleChange, handleSubmit} = useForm(initialData, onValidate)
+        const {form, errors, handleChange, handleSubmit} = useForm(initialData, onValidate)
 
 
     const  AuthRegister = async () => {

@@ -84,19 +84,13 @@ const Register = () => {
     const  AuthRegister = async () => {
 
         try{
-<<<<<<< HEAD
-         const response = await axios.post('http://localhost:5000/register', {email, password, name, surName, gender, birthdate, image})
-          // window.location.href = '/dashboard';
-=======
-         const response = await axios.post('http://localhost:5000/register', {email, password, name, surName, gender, birthdate })
+         const response = await axios.post('http://localhost:5000/register', {email, password, name, surName, gender, birthdate,image })
           const token = response.data.token;
           window.localStorage.setItem('token', token);
->>>>>>> ca77e03eb28bed2dc4e41a79536fc1e143dd114e
         }catch (error) {
           setError(error.response.data.error)
         }
       }
-<<<<<<< HEAD
 
       const UploadAvatar = async (e) => {
         const files = e.target.files;
@@ -114,12 +108,10 @@ const Register = () => {
     }
       
 
-=======
       const navigate = useNavigate();
       async function handleClick(){
          await AuthRegister()
          navigate("/dashboard")
->>>>>>> ca77e03eb28bed2dc4e41a79536fc1e143dd114e
 
       }
     return (

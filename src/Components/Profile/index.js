@@ -51,27 +51,17 @@ const Profile = ({refresh}) => {
     const onValidate = (form) => {
         let isError = false;
         let errors = {};
-        let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-        let regexsurName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-        let regexBirthdate = /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/;
-        let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-        let regexPassword = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-<<<<<<< HEAD
-        let regexPhone = '';
-        let regexAddress = '';
-        let regexNumber = '';
-        let regexCity = '';
-        let regexCountry = '';
-        let regexPostCode = '';
-=======
-        
+        // let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+        // let regexsurName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+        // let regexBirthdate = /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/;
+        // let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+        // let regexPassword = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
         // let regexPhone = '';
         // let regexAddress = '';
         // let regexNumber = '';
         // let regexCity = '';
         // let regexCountry = '';
         // let regexPostCode = '';
->>>>>>> ca77e03eb28bed2dc4e41a79536fc1e143dd114e
 
         const regexList = {
             name: /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/,

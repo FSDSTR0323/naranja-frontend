@@ -5,6 +5,10 @@ import '../Incomes/Income.css';
 import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
+import jwt_decode from 'jwt-decode';
+const jwtSecret = process.env.JWT_SECRET;
+
+const token = window.localStorage.getItem("token");
 
 const FormIncome = () => {
 
@@ -18,13 +22,16 @@ const FormIncome = () => {
 
 //sustituir peticiones***
     const addIncome = async () => {
+
+        const decoded = jwt_decode(token, jwtSecret);
+        var userId = decoded.id
+
+       console.log(userId)
+
         try {
-            await axios.post('http://localhost:5000/api/v1/add-income', {title, amount, description, category, date});
-<<<<<<< HEAD
-=======
-            console.log("esto es title", title)
->>>>>>> ca77e03eb28bed2dc4e41a79536fc1e143dd114e
+            await axios.post(`http://localhost:5000/api/v1/add-income/${userId}`, {title, amount, description, category, date});
             toggle(!refresh)
+
             
         } catch (error) {
             console.error('Error create Income', error)

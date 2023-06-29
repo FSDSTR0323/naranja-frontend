@@ -2,14 +2,25 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import '../IncomesList/IncomeList.css'
+import jwt_decode from 'jwt-decode';
+const jwtSecret = process.env.JWT_SECRET;
+
+const token = window.localStorage.getItem("token");
+
 
 const IncomeList = ({refresh}) => {
 
     const [incomeList, setIncomeList] = useState([])
 
     const incomesGetter = async ()=> {
+
+        const decoded = jwt_decode(token, jwtSecret);
+        var userId = decoded.id
+
+       console.log(userId)
+       
         try {
-            const {data} = await axios.get('http://localhost:5000/api/v1/get-income');
+            const {data} = await axios.get(`http://localhost:5000/api/v1/get-income/${userId}`);
             setIncomeList(data); 
             console.log("esto es data", data)
         }catch ( error ){

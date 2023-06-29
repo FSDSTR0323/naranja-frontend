@@ -25,11 +25,11 @@ const Menu = () => {
         </div>
         <Navbar.Brand  as='h1' id='title__app'> <NavLink className='route__title' to='/dashboard'>Orange Tracker</NavLink></Navbar.Brand>
       <Nav>
-          <Nav.Link><NavLink className='routes' to='/dashboard'>Dashboard</NavLink></Nav.Link> 
-          <Nav.Link><NavLink className='routes' to='/expenses'>Expenses</NavLink></Nav.Link> 
-          <Nav.Link><NavLink className='routes' to='/incomes'>Incomes</NavLink></Nav.Link> 
-          <Nav.Link><NavLink className='routes' to='/viewTransactions'>View Transactions</NavLink></Nav.Link> 
-          <Nav.Link><NavLink className='routes' to='/' onClick={logout}>Sing Out</NavLink></Nav.Link> 
+        <NavLink className='routes' to='/dashboard'>Dashboard</NavLink> 
+        <NavLink className='routes' to='/expenses'>Expenses</NavLink> 
+        <NavLink className='routes' to='/incomes'>Incomes</NavLink> 
+        <NavLink className='routes' to='/viewTransactions'>View Transactions</NavLink> 
+        <NavLink className='routes' to='/' onClick={logout}>Sing Out</NavLink> 
       </Nav>
       </Navbar>
   </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import '../Incomes/Income.css';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
@@ -19,7 +19,7 @@ const FormIncome = () => {
 //sustituir peticiones***
     const addIncome = async () => {
         try {
-            await axios.post(process.env('BACKEND_URL')+'/api/v1/add-income', {title, amount, description, category, date});
+            await axios.post('http://localhost:5000/api/v1/add-income', {title, amount, description, category, date});
             toggle(!refresh)
         } catch (error) {
             console.error('Error create Income', error)

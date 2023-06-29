@@ -6,6 +6,10 @@ import useForm from '../../hooks/useForm';
 
 const Register = () => {
 
+  const [image, setImage] = useState('')
+
+  const [userImage, setUserImage] = useState();
+
     const [name, setName] = useState('');
     const [surName, setSurname] = useState('');
     const [birthdate, setBirthdate] = useState('');
@@ -21,7 +25,8 @@ const Register = () => {
         birthdate: '',
         gender: '',
         email: '',
-        password:''
+        password:'',
+        image: '',
     }
    
 
@@ -78,23 +83,46 @@ const Register = () => {
     const  AuthRegister = async () => {
 
         try{
-         const response = await axios.post('http://localhost:5000/register', {email, password, name, surName, gender, birthdate })
+         const response = await axios.post('http://localhost:5000/register', {email, password, name, surName, gender, birthdate, image})
           // window.location.href = '/dashboard';
         }catch (error) {
           setError(error.response.data.error)
         }
       }
+
+      const UploadAvatar = async (e) => {
+        const files = e.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'OrangeTracker');
+        const res = await fetch ('https://api.cloudinary.com/v1_1/dq0r13g4u/image/upload',
+        {
+            method: 'POST',
+            body: data,
+        }
+        )
+            const file = await res.json();
+            setImage(file.secure_url)
+    }
       
 
 
     return (
         <div className='form__register'>
         <Container className='register__container'>
+
+        <Form.Group controlId="formFileSm" className="mb-3">
+            <Form.Control type="file" size="sm"  onChange={UploadAvatar} />
+            {(<img className='newImg__avatar' onChange={e => setUserImage(e.currentTarget.value)} src={image} alt=''/>)} 
+        </Form.Group>
+
+
         <Form className='custom__form__register' noValidate onSubmit={handleSubmit}>
             <div className='avatar__register__title'>
                 <h1 className="mb-1 fs-2 fw-normal register__title">Register</h1> 
                 <p className='msg__create__account'>Create your account. It's free and only takes a minute.</p>
             </div>
+            
             <Form.Group className="mb-1">
                 <Form.Label className='text-danger' >* Name:</Form.Label>
                 <Form.Control required  name='name' onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size="lg" /> 

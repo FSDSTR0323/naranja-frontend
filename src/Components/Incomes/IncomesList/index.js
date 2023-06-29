@@ -11,6 +11,7 @@ const IncomeList = ({refresh}) => {
         try {
             const {data} = await axios.get('http://localhost:5000/api/v1/get-income');
             setIncomeList(data); 
+            console.log("esto es data", data)
         }catch ( error ){
             console.log('Error get Income', error)
         }

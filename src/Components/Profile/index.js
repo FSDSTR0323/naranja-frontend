@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import Menu from '../Menu';
 import '../Profile/Profile.css'
@@ -13,7 +13,7 @@ const token = window.localStorage.getItem("token");
 
 const Profile = ({refresh}) => {
 
-    const [setUserList] = useState([])
+    const [userInfo, setUserInfo] = useState([])
     const [image, setImage] = useState('')
 
     const [userImage, setUserImage] = useState();
@@ -56,48 +56,34 @@ const Profile = ({refresh}) => {
         let regexBirthdate = /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/;
         let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
         let regexPassword = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-        // let regexPhone = '';
-        // let regexAddress = '';
-        // let regexNumber = '';
-        // let regexCity = '';
-        // let regexCountry = '';
-        // let regexPostCode = '';
+        let regexPhone = '';
+        let regexAddress = '';
+        let regexNumber = '';
+        let regexCity = '';
+        let regexCountry = '';
+        let regexPostCode = '';
 
-        // if (!form.name.trim()) {
-        //     errors.name = 'The "Name" field must not be empty.'
-        //     isError = true;
-        //   } else if (!regexName.test(form.name)){
-        //     errors.name = 'The "Name" field only accepts letters and numbers.'
-        //   }
+        const regexList = {
+            name: /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/,
+            surName: /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/,
+            birthdate: /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/,
+            email: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/,
+            password: /^(?=.*[A-Z])(?=.*\d).{8,}$/
+        };
 
-        //   if (!form.surName.trim()) {
-        //     errors.surName = 'The "surname" field must not be empty.'
-        //     isError = true;
-        //   } else if (!regexsurName.test(form.surName)){
-        //     errors.surName = 'The "surName" field only accepts letters and numbers.'
-        //   }
+        console.log('esto es form', form)
 
-        //   if (!form.birthdate.trim()) {
-        //     errors.birthdate = 'The "birthdate" field must not be empty.'
-        //     isError = true;
-        //   } else if (!regexBirthdate.test(form.birthdate)){
-        //     errors.birthdate = 'You must be of legal age.'
-        //   }
+        const {email, password, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image} = form
 
-        //   if (!form.email.trim()) {
-        //     errors.email = 'The "email" field must not be empty.'
-        //     isError = true;
-        //   } else if (!regexEmail.test(form.email)){
-        //     errors.email = 'email field must be formatted as "@" email'
-        //   }
-      
-        //   if (!form.password.trim()) {
-        //     errors.password = 'The "password" field must not be empty.'
-        //     isError = true;
-        //   } else if (!regexPassword.test(form.password)){
-        //     errors.password = 'The field "password" is not valid, it must contain at least one capital letter, one number and a minimum of 8 characters'
-        //   }
-      
+            for (const [key,value] of Object.entries(form)) { // Object.entries:  Nos devuelve una array con la key y value.
+                if(!value.trim()){
+                    errors[key] = `The "${key}" field must not be empty.`
+                    isError = true;
+                }else if (!regexList[key].test(value)){
+                    errors[key] = `The "${key}" field only accepts letters and numbers.`
+                }
+            }
+
           return isError ? errors : null
         }
 
@@ -113,7 +99,7 @@ const Profile = ({refresh}) => {
         try{
             const {data} = await axios.post(`http://localhost:5000/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image })
           // window.location.href = '/dashboard';
-          setUserList(data)
+          setUserInfo(data)
         }catch (error) {
           setError(error.response.data.error)
         }
@@ -141,12 +127,18 @@ const Profile = ({refresh}) => {
         var userId = decoded.id
        console.log(userId)
         try {
-            const {data} = await axios.get(`http://localhost:5000/user/${userId}`); // email, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image
-            setUserList(data); 
+            const {data} = await axios.get(`http://localhost:5000/user/${userId}`);
+            setUserInfo(data); 
+            console.log('esto es data', data)
         }catch ( error ){
             console.log('Error get Income', error)
         }
     };   
+
+    useEffect(() => {
+      avatarGetter()
+    }, [])
+    
 
 
     return (
@@ -162,93 +154,93 @@ const Profile = ({refresh}) => {
             </div>
 
         <Form.Group controlId="formFileSm" className="mb-3">
-            <Form.Control type="file" size="sm" onChange={UploadAvatar} />
-            {(<img className='newImg__avatar' onChange={e => setUserImage(e.currentTarget.value)} src={image} alt=''/>)} 
+            <Form.Control type="file" size="sm"  onChange={UploadAvatar} />
+            {(<img className='newImg__avatar'value={userInfo.image} onChange={e => setUserImage(e.currentTarget.value)} src={image} alt=''/>)} 
         </Form.Group>
 
             <Form.Group className="mb-1">
                 <Form.Label className='text-danger' >* Name:</Form.Label>
-                <Form.Control required  name='name' onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size='md' /> 
+                <Form.Control required  name='name' value={userInfo.name} onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size='md' /> 
                 {errors.name && <div className="alert alert-warning p-1">{errors.name}</div>}
             </Form.Group>
 
             <Form.Group className="mb-1">
                 <Form.Label  className='text-danger'>* Surname:</Form.Label>
-                <Form.Control required className='surName'  onChange={e => setSurname(e.currentTarget.value)} name='surName' type='text' size='md' />
+                <Form.Control required className='surName' value={userInfo.surName} onChange={e => setSurname(e.currentTarget.value)} name='surName' type='text' size='md' />
                 {errors.surName && <div className="alert alert-warning p-1">{errors.surName}</div>}
             </Form.Group>
 
             <Form.Group>
                 <Form.Label  className='text-danger'>* Add your birthdate:</Form.Label>
-                <Form.Control size='md' required className='birthdate' onChange={e => setBirthdate(e.currentTarget.value)} type='date' name='birthdate' />
+                <Form.Control size='md' required className='birthdate' value={userInfo.birthdate} onChange={e => setBirthdate(e.currentTarget.value)} type='date' name='birthdate' />
                 {errors.birthdate && <div className="alert alert-warning p-1">{errors.birthdate}</div>}
             </Form.Group>
 
             <Form.Group>
             <Form.Label  className='text-danger'>* Select gender:</Form.Label>
-                <Form.Check label="Male" onChange={e => setGender(e.currentTarget.value)} value='male' size='md' required className='gender' name='gender' type='radio'/>
-                <Form.Check label="Female" onChange={e => setGender(e.currentTarget.value)} value='female' size='md' required className='gender' name='gender' type='radio' />
-                <Form.Check label="Other" onChange={e => setGender(e.currentTarget.value)} value='other' size='md' required className='gender' name='gender' type='radio' />
+                <Form.Check label="Male" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)}  size='md' required className='gender' name='gender' type='radio'/>
+                <Form.Check label="Female" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)}  size='md' required className='gender' name='gender' type='radio' />
+                <Form.Check label="Other" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)}  size='md' required className='gender' name='gender' type='radio' />
                 {errors.gender && <div className="alert alert-warning p-1">{errors.gender}</div>}
             </Form.Group>
 
             <Form.Group controlId="user__email__address">
                 <Form.Label  className="text-danger">* Add your email:</Form.Label>
-                <Form.Control required value={form.email}  type="email" size='md' className="position-relative" autoComplete='user-name' name='email' onChange={handleChange} />
+                <Form.Control required  value={userInfo.email} type="email" size='md' className="position-relative" autoComplete='user-name' name='email' onChange={handleChange} />
                 {errors.email && <div className="alert alert-warning p-1">{errors.email}</div>}
             </Form.Group>
 
             <Form.Group controlId="user__confirm__email__address">
                 <Form.Label  className="text-danger">* Confirm email:</Form.Label>
-                <Form.Control required value={email} onChange={e => setEmail(e.currentTarget.value)} type="email" size='md'  name='email' autoComplete='user-name' className="position-relative" />
+                <Form.Control required value={userInfo.email} onChange={e => setEmail(e.currentTarget.value)} type="email" size='md'  name='email' autoComplete='user-name' className="position-relative" />
                 {errors.email && <div className="alert alert-warning p-1">{errors.email}</div>}
             </Form.Group>
 
             <Form.Group className="mb-1" controlId="user__password">
                 <Form.Label  className="text-danger">* Password:</Form.Label>
-                <Form.Control required value={form.password} type="password" size='md'  className="position-relative" name='password' autoComplete="new-password" onChange={handleChange}/>
+                <Form.Control required value={userInfo.password} type="password" size='md'  className="position-relative" name='password' autoComplete="new-password" onChange={handleChange}/>
                 {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
             </Form.Group>
 
             <Form.Group className="mb-4" controlId="user__confirm__password">
                 <Form.Label  className="text-danger">* Confirm password:</Form.Label>
-                <Form.Control required value={password}  type="password" size='md' onChange={e => setPassword(e.currentTarget.value)} name='password' autoComplete="new-password" className="position-relative" />
+                <Form.Control required value={userInfo.password}  type="password" size='md' onChange={e => setPassword(e.currentTarget.value)} name='password' autoComplete="new-password" className="position-relative" />
                 {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
             </Form.Group>
 
             <Form.Group id='phone__user'>
                 <Form.Label   className='text-danger'>Phone:</Form.Label>
-                <Form.Control onChange={e => setPhone(e.currentTarget.value)} value={phone} type='text' size='md'  autoComplete='username' />
+                <Form.Control value={userInfo.phone} onChange={e => setPhone(e.currentTarget.value)} type='text' size='md'  autoComplete='username' />
                 {errors.phone && <div className="alert alert-warning p-1">{errors.phone}</div>}
             </Form.Group>
 
             <Form.Group id='address__user'>
                 <Form.Label  className='text-danger'>Address:</Form.Label>
-                <Form.Control onChange={e => setAddress(e.currentTarget.value)} value={address} type='text' size='md'  autoComplete='address'  />
+                <Form.Control value={userInfo.address} onChange={e => setAddress(e.currentTarget.value)} type='text' size='md'  autoComplete='address'  />
                 {errors.address && <div className="alert alert-warning p-1">{errors.address}</div>}
             </Form.Group>
 
             <Form.Group>
                 <Form.Label  className='text-danger'>Number:</Form.Label>
-                <Form.Control onChange={e => setNumber(e.currentTarget.value)} value={number} type='text' size='md'  autoComplete='address' />
+                <Form.Control value={userInfo.number} onChange={e => setNumber(e.currentTarget.value)} type='text' size='md'  autoComplete='address' />
                 {errors.number && <div className="alert alert-warning p-1">{errors.number}</div>}
             </Form.Group>
 
             <Form.Group id='city__user'>
                 <Form.Label  className='text-danger'>City:</Form.Label>
-                <Form.Control onChange={e => setCity(e.currentTarget.value)} value={city} type='text' size='md'/>
+                <Form.Control value={userInfo.city} onChange={e => setCity(e.currentTarget.value)} type='text' size='md'/>
                 {errors.city && <div className="alert alert-warning p-1">{errors.city}</div>}
             </Form.Group>
 
             <Form.Group id='country__user'>
                 <Form.Label  className='text-danger'>Country:</Form.Label>
-                <Form.Control onChange={e => setCountry(e.currentTarget.value)} value={country} type='text' size='md' />
+                <Form.Control value={userInfo.country} onChange={e => setCountry(e.currentTarget.value)} type='text' size='md' />
                 {errors.country && <div className="alert alert-warning p-1">{errors.country}</div>}
             </Form.Group>
 
             <Form.Group id='postCode__user'>
                 <Form.Label  className='text-danger'>Post code:</Form.Label>
-                <Form.Control onChange={e => setPostCode(e.currentTarget.value)} value={postCode} type='text' size='md' />
+                <Form.Control value={userInfo.postCode}  onChange={e => setPostCode(e.currentTarget.value)} type='text' size='md' />
                 {errors.postCode && <div className="alert alert-warning p-1">{errors.postCode}</div>}
             </Form.Group>
 

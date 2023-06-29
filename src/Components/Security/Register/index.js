@@ -3,6 +3,7 @@ import { Button, Container, Form} from 'react-bootstrap';
 import './Register.css'
 import axios from 'axios';
 import useForm from '../../hooks/useForm';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
@@ -79,14 +80,18 @@ const Register = () => {
 
         try{
          const response = await axios.post('http://localhost:5000/register', {email, password, name, surName, gender, birthdate })
-          // window.location.href = '/dashboard';
+          const token = response.data.token;
+          window.localStorage.setItem('token', token);
         }catch (error) {
           setError(error.response.data.error)
         }
       }
-      
+      const navigate = useNavigate();
+      async function handleClick(){
+         await AuthRegister()
+         navigate("/dashboard")
 
-
+      }
     return (
         <div className='form__register'>
         <Container className='register__container'>
@@ -146,7 +151,7 @@ const Register = () => {
             </Form.Group>
 
             
-            <Button type='submit' onClick={AuthRegister} className='btn__register' size='lg'  variant="outline-primary">Register Now</Button>
+            <Button type='submit' onClick={handleClick} className='btn__register' size='lg'  variant="outline-primary">Register Now</Button>
             {error &&  <p id='err__msg'>{error}</p>}
             <Form.Text className='msg__create__account'>Already have an account? <a className='signin__register' href='/'>Sign in</a></Form.Text>
         </Form>

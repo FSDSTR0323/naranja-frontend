@@ -56,6 +56,7 @@ const Profile = ({refresh}) => {
         let regexBirthdate = /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/;
         let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
         let regexPassword = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+        
         // let regexPhone = '';
         // let regexAddress = '';
         // let regexNumber = '';

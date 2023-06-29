@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Container, Form, Navbar} from 'react-bootstrap'
 import './Login.css'
 import axios from 'axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {

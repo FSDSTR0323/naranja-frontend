@@ -20,7 +20,12 @@ const FormIncome = () => {
     const addIncome = async () => {
         try {
             await axios.post('http://localhost:5000/api/v1/add-income', {title, amount, description, category, date});
+<<<<<<< HEAD
+=======
+            console.log("esto es title", title)
+>>>>>>> ca77e03eb28bed2dc4e41a79536fc1e143dd114e
             toggle(!refresh)
+            
         } catch (error) {
             console.error('Error create Income', error)
         }

@@ -3,8 +3,11 @@ import { Button, Container, Form, Navbar} from 'react-bootstrap'
 import './Login.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
+
+const jwtSecret = process.env.JWT_SECRET;
 
 const Login = () => {
 
@@ -20,10 +23,11 @@ const Login = () => {
       console.log('vemos response', response)
       //Autentification
       const token = response.data.token;
+
       const userId = response.data.user.id
       window.localStorage.setItem('token', token);
       window.localStorage.setItem("userId", userId)
-      
+
     }catch (error) {
       console.log('This is error', error)
       setError(error.response.data.error)

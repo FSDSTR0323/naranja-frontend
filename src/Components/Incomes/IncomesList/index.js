@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import '../IncomesList/IncomeList.css'
 import jwt_decode from 'jwt-decode';
+import { dateFormat } from '../../utils/dateFormat';
 const jwtSecret = process.env.JWT_SECRET;
 const token = window.localStorage.getItem("token");
 
@@ -25,6 +26,9 @@ const IncomeList = ({refresh}) => {
             console.log('Error get Income', error)
         }
     };   
+    useEffect(()=>{
+        incomesGetter()
+    },[refresh]) 
 
     const handleDeleteIncome = async (_id) => {
         try {
@@ -34,10 +38,18 @@ const IncomeList = ({refresh}) => {
             console.log(error)
         }
     }
+
+    //MODIFY INCOME PENDIENTE ***
+    const handleModifyIncome = async (_id) => {
+        try {
+            await axios.put(`http://localhost:5000/api/v1/delete-income/${_id}`);
+            incomesGetter()
+        } catch (error){
+            console.log(error)
+        }
+    }
     
-    useEffect(()=>{
-        incomesGetter()
-    },[refresh]) 
+   
      
 
     const IncomeCard = ({title, amount, date, category, description, _id }) => (
@@ -48,10 +60,11 @@ const IncomeList = ({refresh}) => {
                     </div>
                     <h5>{title}</h5>
                     <p>{amount}</p>
-                    <date>{date}</date>
+                    <date>{dateFormat(date)}</date>
                     <p>{category}</p>
                     <p>{description}</p>
                     <Button type='submit' id='dltIncome' onClick={()=> handleDeleteIncome(_id)}>Delete</Button>
+                    <Button type='submit' id='mdfyIncome' onClick={()=> handleModifyIncome(_id)}>Modify</Button> 
             </div>
         
         </div>

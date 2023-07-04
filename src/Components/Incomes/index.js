@@ -6,9 +6,6 @@ import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
 
-
-
-
 const FormIncome = () => {
 
     const [refresh, toggle] = useState(false);
@@ -54,6 +51,7 @@ const FormIncome = () => {
         <div className='total__income'>
         <Form.Control as='input'  size='lg' disabled readOnly/>
         </div>
+        
         <div id='form__container__income'>
             <Form  className='custom__form__income'>
                 <Form.Group>

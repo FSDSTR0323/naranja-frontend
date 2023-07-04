@@ -49,7 +49,6 @@ const Profile = ({refresh}) => {
         }
       }
     
-      
 //Cargar avatar profile
     const UploadAvatar = async (e) => {
         const files = e.target.files;
@@ -83,6 +82,7 @@ const Profile = ({refresh}) => {
       avatarGetter()
         console.log('avatar get')
     }, [])
+    
     
     
  

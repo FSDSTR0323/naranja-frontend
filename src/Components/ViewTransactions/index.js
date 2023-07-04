@@ -83,6 +83,7 @@ return (
             category={transaction.category}
             description={transaction.description}
           />
+          
         ))}
       </div>
     </div>

@@ -38,8 +38,7 @@ const Profile = ({refresh}) => {
 
     const  updateUser = async () => {
             
-        const decoded = jwt_decode(token, jwtSecret);
-        var userId = decoded.id
+        const userId = window.localStorage.getItem("userId");
        console.log(userId)
 
         try{
@@ -70,7 +69,6 @@ const Profile = ({refresh}) => {
 
 // Traer datos del back
     const avatarGetter = async ()=> {
-        const decoded = await jwt_decode(token, jwtSecret);
         let userId = window.localStorage.getItem('userId') 
        console.log(userId)
         try {
@@ -85,9 +83,6 @@ const Profile = ({refresh}) => {
     useEffect(() => {
       avatarGetter()
         console.log('avatar get')
-      return (() => {
-        setUserInfo([])
-      })
     }, [])
     
     
@@ -146,55 +141,6 @@ const Profile = ({refresh}) => {
           return isError ? errors : null
         }
         const {form, errors, handleChange, handleSubmit} = useForm(initialData, onValidate)
-
-
-    const  updateUser = async () => {
-            
-        const userId = window.localStorage.getItem("userId");
-       console.log(userId)
-
-        try{
-            const {data} = await axios.post(`${backendUrl}/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image })
-          // window.location.href = '/dashboard';
-          setUserInfo(data)
-        }catch (error) {
-          setError(error.response.data.error)
-        }
-      }
-    
-//Cargar avatar profile
-    const UploadAvatar = async (e) => {
-        const files = e.target.files;
-        const data = new FormData();
-        data.append('file', files[0]);
-        data.append('upload_preset', 'OrangeTracker');
-        const res = await fetch ('https://api.cloudinary.com/v1_1/dq0r13g4u/image/upload',
-        {
-            method: 'POST',
-            body: data,
-        }
-        )
-            const file = await res.json();
-            setImage(file.secure_url)
-    }
-
-// Traer datos del back
-    const avatarGetter = async (_id)=> {
-        const userId = window.localStorage.getItem("userId");
-       console.log(userId)
-        try {
-            const {data} = await axios.get(`${backendUrl}/user/${userId}`);
-            setUserInfo(data); 
-            console.log('esto es data', data)
-        }catch ( error ){
-            console.log('Error get Income', error)
-        }
-    };   
-
-    useEffect(() => {
-      avatarGetter()
-    }, [])
-    
 
 
 

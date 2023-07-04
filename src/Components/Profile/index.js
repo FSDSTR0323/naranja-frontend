@@ -8,7 +8,6 @@ import { NavLink } from 'react-router-dom';
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
- //mortadela
 
 
 const Profile = ({refresh}) => {

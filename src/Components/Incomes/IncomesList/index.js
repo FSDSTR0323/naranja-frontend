@@ -2,10 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import '../IncomesList/IncomeList.css'
-import jwt_decode from 'jwt-decode';
 import { dateFormat } from '../../utils/dateFormat';
-const jwtSecret = process.env.JWT_SECRET;
-const token = window.localStorage.getItem("token");
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const IncomeList = ({refresh}) => {
@@ -14,8 +12,7 @@ const IncomeList = ({refresh}) => {
 
     const incomesGetter = async ()=> {
 
-        const decoded = jwt_decode(token, jwtSecret);
-        let userId = decoded.id
+        const userId = window.localStorage.getItem("userId");
        console.log(userId)
         try {
             const {data} = await axios.get(`${backendUrl}/api/v1/get-income/${userId}`);

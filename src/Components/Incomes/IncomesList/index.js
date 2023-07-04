@@ -5,7 +5,6 @@ import '../IncomesList/IncomeList.css'
 import jwt_decode from 'jwt-decode';
 import { dateFormat } from '../../utils/dateFormat';
 const jwtSecret = process.env.JWT_SECRET;
-
 const token = window.localStorage.getItem("token");
 
 
@@ -16,14 +15,13 @@ const IncomeList = ({refresh}) => {
     const incomesGetter = async ()=> {
 
         const decoded = jwt_decode(token, jwtSecret);
-        var userId = decoded.id
-
+        let userId = decoded.id
        console.log(userId)
-       
         try {
             const {data} = await axios.get(`http://localhost:5000/api/v1/get-income/${userId}`);
             setIncomeList(data); 
             console.log("esto es data", data)
+           
         }catch ( error ){
             console.log('Error get Income', error)
         }

@@ -4,6 +4,7 @@ import './Register.css'
 import axios from 'axios';
 import useForm from '../../hooks/useForm';
 import { useNavigate } from 'react-router-dom';
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const Register = () => {
 
@@ -63,9 +64,11 @@ const Register = () => {
     const  AuthRegister = async () => {
 
         try{
-         const response = await axios.post('http://localhost:5000/register', {email, password, name, surName, gender, birthdate,image })
+         const response = await axios.post(`${backendUrl}/register`, {email, password, name, surName, gender, birthdate, image })
           const token = response.data.token;
+          const userId = response.data.user.id
           window.localStorage.setItem('token', token);
+          window.localStorage.setItem("userId", userId)
         }catch (error) {
           setError(error.response.data.error)
         }

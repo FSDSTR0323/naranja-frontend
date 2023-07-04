@@ -3,7 +3,9 @@ import { Button, Container, Form, Navbar} from 'react-bootstrap'
 import './Login.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -17,15 +19,15 @@ const Login = () => {
   const  AuthLogin = async () => {
    
     try{
-      const response = await axios.post('http://localhost:5000/login', {email, password})
+      const response = await axios.post(`${backendUrl}/login`, {email, password})
       console.log('vemos response', response)
       //Autentification
       const token = response.data.token;
-      const decoded = await jwt_decode(token, jwtSecret);
-      let userId = decoded.id
+
+      const userId = response.data.user.id
       window.localStorage.setItem('token', token);
-      window.localStorage.setItem('userId', userId);
-      
+      window.localStorage.setItem("userId", userId)
+
     }catch (error) {
       console.log('This is error', error)
       setError(error.response.data.error)

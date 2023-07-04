@@ -5,11 +5,6 @@ import '../Incomes/Income.css';
 import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
-import jwt_decode from 'jwt-decode';
-const jwtSecret = process.env.JWT_SECRET;
-
-
-const token = window.localStorage.getItem("token");
 
 const FormIncome = () => {
 
@@ -21,18 +16,23 @@ const FormIncome = () => {
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
 
+    const handleAmountChange = (event) => {
+        const value = parseFloat(event.target.value);
+        setAmount(value);
+      };
 //sustituir peticiones***
     const addIncome = async () => {
+        console.log("hola")
 
-        const decoded = jwt_decode(token, jwtSecret);
-        var userId = decoded.id
+        let userId = window.localStorage.getItem('userId')
 
-       console.log(userId)
+       console.log(userId, title, amount, description, category, date)
 
+      
         try {
             await axios.post(`http://localhost:5000/api/v1/add-income/${userId}`, {title, amount, description, category, date});
             toggle(!refresh)
-
+                console.log("aaaa")
             
         } catch (error) {
             console.error('Error create Income', error)
@@ -59,7 +59,7 @@ const FormIncome = () => {
                     <Form.Control value={title} onChange={e => setTitle(e.currentTarget.value)}required className='add__income' type='text' placeholder='Add Income' />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Control value={amount} onChange={e => setAmount(e.currentTarget.value)} required className='amount' type='number' placeholder='Add Amount' />
+                    <Form.Control value={amount} onChange={handleAmountChange} required className='amount' type='number' placeholder='Add Amount' />
                 </Form.Group>
                 <Form.Group>
                     <Form.Control value={date} onChange={e => setDate(e.currentTarget.value)} className='date' type='date' />

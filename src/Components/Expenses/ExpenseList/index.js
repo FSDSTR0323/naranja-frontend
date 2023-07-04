@@ -2,9 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button} from 'react-bootstrap'
 import '../ExpenseList/ExpenseList.css'
-import jwt_decode from 'jwt-decode';
-const jwtSecret = process.env.JWT_SECRET;
-const token = window.localStorage.getItem("token");
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
@@ -17,8 +14,7 @@ const ExpenseList = ({refresh}) => {
 
   const expensesGetter = async ()=> {
     console.log("expense getter?");
-    const decoded = jwt_decode(token, jwtSecret);
-    let userId = decoded.id
+    const userId = window.localStorage.getItem("userId");
     // const userId = window.localStorage.getItem("userId");
     console.log(userId)
       try {

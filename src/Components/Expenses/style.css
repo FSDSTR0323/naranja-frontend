@@ -1,55 +1,25 @@
 
-.expense__container {
-    display: flex;
+
+
+.main__container {
     background: #ffffffae;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    flex-direction: column;
-    margin: 3em;
-    overflow: hidden;
-}
-/* .border__animation {
-    align-items: center;
-    position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 1;
+    /* border: 3px solid rgb(180, 180, 180); */
     border-radius: 10px;
-    overflow: hidden;
+    overflow: auto;
+    margin: 3em;
 }
-.border__animation::before{
-    content: '';
-    position: absolute;
-    width: 700px;
-    height: 700px;
-    background-image: conic-gradient(transparent,transparent,transparent,#ff0000);
-    animation: animate 4s linear infinite;
+
+
+#form__container__expense {
+    display: flex;
+    flex-wrap: wrap;
+
 }
-@keyframes animate {
-    0%
-    {
-        transform: rotate(0deg);
-    }
-    100%
-    {
-        transform: rotate(360deg);
-    }
-}
-.border__animation::after{
-    content: '';
-    position: absolute;
-    width: 700px;
-    height: 700px;
-    background-image: conic-gradient(transparent,transparent,transparent,#fbff00);
-    animation: animate 4s linear infinite;
-    animation-delay: -2s;
-}
-.border__animation span {
-    position: absolute;
-    inset: 5px;
-    border: 16px;
-    background-color: #ffffff;
-    z-index: 1;
-} */
 .title_expense {
     margin: 1em;
     padding: 1em;
@@ -59,18 +29,22 @@
     color: #f7a20e;
 }
 
-.total__expense{
+.total__expense {
+    display: flex;
+    flex-wrap: wrap;
     padding: 1em;
-    max-width: 100vw;
+    width: 100%;
 }
 
-.custom__form__expense {
+.custom__form__expense  {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     margin: 2em;
-    margin-top: 2em;
-    width: 25vw;
+    width: 25rem;
 }
 
-.select__category__expense {
+.select__category__expense  {
     cursor: pointer;
     width: 10rem;
     margin-top: 2em;
@@ -80,7 +54,7 @@
     color: #fff;
     background: #f7a20e;
     border: none;
-    margin-left: 8em;
+    margin-right: 8em;
 }
 #button__add:hover {
     background: #ffbe4d;
@@ -95,4 +69,11 @@
 
 .date {
     margin-top: 2em;
+}
+
+#expense__list__container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 3em;
+    width: 800px;
 }

@@ -4,10 +4,8 @@ import Menu from '../Menu';
 import '../Profile/Profile.css'
 import axios from 'axios';
 import useForm from '../hooks/useForm';
-import jwt_decode from 'jwt-decode';
-const jwtSecret = process.env.JWT_SECRET;
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-const token = window.localStorage.getItem("token");
  
 
 
@@ -92,12 +90,11 @@ const Profile = ({refresh}) => {
 
     const  updateUser = async () => {
             
-        const decoded = jwt_decode(token, jwtSecret);
-        var userId = decoded.id
+        const userId = window.localStorage.getItem("userId");
        console.log(userId)
 
         try{
-            const {data} = await axios.post(`http://localhost:5000/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image })
+            const {data} = await axios.post(`${backendUrl}/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image })
           // window.location.href = '/dashboard';
           setUserInfo(data)
         }catch (error) {
@@ -123,11 +120,10 @@ const Profile = ({refresh}) => {
 
 // Traer datos del back
     const avatarGetter = async (_id)=> {
-        const decoded = jwt_decode(token, jwtSecret);
-        var userId = decoded.id
+        const userId = window.localStorage.getItem("userId");
        console.log(userId)
         try {
-            const {data} = await axios.get(`http://localhost:5000/user/${userId}`);
+            const {data} = await axios.get(`${backendUrl}/user/${userId}`);
             setUserInfo(data); 
             console.log('esto es data', data)
         }catch ( error ){

@@ -3,6 +3,7 @@ import { Button, Container, Form, Navbar} from 'react-bootstrap'
 import './Login.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
 const Login = () => {
@@ -15,11 +16,13 @@ const Login = () => {
   const  AuthLogin = async () => {
    
     try{
-      const response = await axios.post('http://localhost:5000/login', {email, password})
+      const response = await axios.post(`${backendUrl}/login`, {email, password})
       console.log('vemos response', response)
       //Autentification
       const token = response.data.token;
+      const userId = response.data.user.id
       window.localStorage.setItem('token', token);
+      window.localStorage.setItem("userId", userId)
       
     }catch (error) {
       console.log('This is error', error)

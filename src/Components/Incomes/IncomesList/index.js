@@ -14,7 +14,7 @@ const IncomeList = ({refresh}) => {
     const incomesGetter = async ()=> {
 
         const decoded = jwt_decode(token, jwtSecret);
-        var userId = decoded.id
+        let userId = decoded.id
        console.log(userId)
         try {
             const {data} = await axios.get(`http://localhost:5000/api/v1/get-income/${userId}`);
@@ -35,9 +35,9 @@ const IncomeList = ({refresh}) => {
         }
     }
     
-    // useEffect(()=>{
-    //     incomesGetter()
-    // },[refresh]) 
+    useEffect(()=>{
+        incomesGetter()
+    },[refresh]) 
      
 
     const IncomeCard = ({title, amount, date, category, description, _id }) => (

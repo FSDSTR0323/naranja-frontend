@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
     // Logout
     const logout = () => {
       localStorage.removeItem('token')
+      localStorage.removeItem('userId')
   }
 
 const Menu = () => {

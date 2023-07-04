@@ -5,10 +5,9 @@ import '../Incomes/Income.css';
 import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
-import jwt_decode from 'jwt-decode';
-const jwtSecret = process.env.JWT_SECRET;
 
-const token = window.localStorage.getItem("token");
+
+
 
 const FormIncome = () => {
 
@@ -28,15 +27,14 @@ const FormIncome = () => {
     const addIncome = async () => {
         console.log("hola")
 
-        const decoded = jwt_decode(token, jwtSecret);
-        var userId = decoded.id
+        let userId = window.localStorage.getItem('userId')
 
        console.log(userId, title, amount, description, category, date)
 
       
         try {
             await axios.post(`http://localhost:5000/api/v1/add-income/${userId}`, {title, amount, description, category, date});
-            // toggle(!refresh)
+            toggle(!refresh)
                 console.log("aaaa")
             
         } catch (error) {
@@ -88,7 +86,7 @@ const FormIncome = () => {
             </Form>
             
         <div id='income__list__container'>
-            {/* <IncomeList refresh={refresh}/> */}
+            <IncomeList refresh={refresh}/>
         </div>
         </div>
    

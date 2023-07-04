@@ -2,6 +2,7 @@
     background-image: linear-gradient(80deg, #ffffffcb, #b0fffe42,#fff79c42, #ffffffcb,#b0fffe42,#fff79c42);
     background-size: 600%;
     animation: color 20s ease-in infinite;
+    padding-bottom: 2em;
 }
 @keyframes color {
     0%{

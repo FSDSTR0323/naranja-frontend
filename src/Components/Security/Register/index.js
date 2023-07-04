@@ -34,46 +34,25 @@ const Register = () => {
     const onValidate = (form) => {
         let isError = false;
         let errors = {};
-        let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-        let regexsurName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-        let regexBirthdate = /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/;
-        let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-        let regexPassword = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-        if (!form.name.trim()) {
-            errors.name = 'The "Name" field must not be empty.'
-            isError = true;
-          } else if (!regexName.test(form.name)){
-            errors.name = 'The "Name" field only accepts letters and numbers.'
-          }
+        const regexList = {
+            name: /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/,
+            surName: /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/,
+            birthdate: /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/,
+            email: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/,
+            password: /^(?=.*[A-Z])(?=.*\d).{8,}$/
+        };  
 
-          if (!form.surName.trim()) {
-            errors.surName = 'The "surname" field must not be empty.'
-            isError = true;
-          } else if (!regexsurName.test(form.surName)){
-            errors.surName = 'The "surName" field only accepts letters and numbers.'
-          }
+        const {email, password, name, surName, gender, birthdate, image} = form
 
-          if (!form.birthdate.trim()) {
-            errors.birthdate = 'The "birthdate" field must not be empty.'
-            isError = true;
-          } else if (!regexBirthdate.test(form.birthdate)){
-            errors.birthdate = 'You must be of legal age.'
-          }
-
-          if (!form.email.trim()) {
-            errors.email = 'The "email" field must not be empty.'
-            isError = true;
-          } else if (!regexEmail.test(form.email)){
-            errors.email = 'email field must be formatted as "@" email'
-          }
-      
-          if (!form.password.trim()) {
-            errors.password = 'The "password" field must not be empty.'
-            isError = true;
-          } else if (!regexPassword.test(form.password)){
-            errors.password = 'The field "password" is not valid, it must contain at least one capital letter, one number and a minimum of 8 characters'
-          }
+        for (const [key,value] of Object.entries(form)) { // Object.entries:  Nos devuelve una array con la key y value.
+                if(!value.trim()){
+                    errors[key] = `The "${key}" field must not be empty.`
+                    isError = true;
+                }else if (!regexList[key].test(value)){
+                    errors[key] = `The "${key}" field only accepts letters and numbers.`
+                }
+            }
       
           return isError ? errors : null
         }

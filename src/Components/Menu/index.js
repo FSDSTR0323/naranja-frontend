@@ -14,7 +14,6 @@ const Menu = () => {
   return (
   
   <div className='menu__container'>
-      <Navbar className='menu'>
         <div className='img__profile'>
           <NavLink className='routes' to='/profile'>
             <img id='user__avatar' 
@@ -23,15 +22,18 @@ const Menu = () => {
             alt='Bootstrap 5'/>
           </NavLink>
         </div>
-        <Navbar.Brand  as='h1' id='title__app'> <NavLink className='route__title' to='/dashboard'>Orange Tracker</NavLink></Navbar.Brand>
-      <Nav>
-        <NavLink className='routes' to='/dashboard'>Dashboard</NavLink> 
-        <NavLink className='routes' to='/expenses'>Expenses</NavLink> 
-        <NavLink className='routes' to='/incomes'>Incomes</NavLink> 
-        <NavLink className='routes' to='/viewTransactions'>View Transactions</NavLink> 
-        <NavLink className='routes' to='/' onClick={logout}>Sing Out</NavLink> 
-      </Nav>
-      </Navbar>
+        <div id='title__app'>
+          <h3> <NavLink className='route__title' to='/dashboard'>Orange Tracker</NavLink></h3>
+        </div>
+        <div id='routes__menu'>
+          <NavLink className='routes' to='/dashboard'>Dashboard</NavLink> 
+          <NavLink className='routes' to='/expenses'>Expenses</NavLink> 
+          <NavLink className='routes' to='/incomes'>Incomes</NavLink> 
+          <NavLink className='routes' to='/viewTransactions'>View Transactions</NavLink> 
+          <NavLink id='sign__out' className='routes' to='/' onClick={logout}>Sign Out</NavLink> 
+        </div>
+   
+
   </div>
   )
 }

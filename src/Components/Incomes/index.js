@@ -8,6 +8,7 @@ import IncomeList from './IncomesList';
 import jwt_decode from 'jwt-decode';
 const jwtSecret = process.env.JWT_SECRET;
 
+
 const token = window.localStorage.getItem("token");
 
 const FormIncome = () => {
@@ -15,7 +16,7 @@ const FormIncome = () => {
     const [refresh, toggle] = useState(false);
 
     const [title, setTitle] = useState('');
-    const [amount, setAmount] = useState('');
+    const [amount, setAmount] = useState(0);
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
@@ -50,6 +51,7 @@ const FormIncome = () => {
         <div className='total__income'>
         <Form.Control as='input'  size='lg' disabled readOnly/>
         </div>
+        
         <div id='form__container__income'>
             <Form  className='custom__form__income'>
                 <Form.Group>

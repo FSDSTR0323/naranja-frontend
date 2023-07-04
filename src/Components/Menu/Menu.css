@@ -1,21 +1,43 @@
 #user__avatar{
+    display: flex;
+    justify-content: center;
     width: 50px;
     height: 50px;
+    margin-left: 5em;
 }
 
 .menu__container {
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
+    align-items: center;
+    padding: 1em;
 }
 
+#routes__menu{
+    display: flex;
+    flex-wrap: wrap;
+    font-weight:  500;
+    font-size: 15px;
+    gap: 5em;
+    margin-left: 8em;
+}
+
+#sign__out {
+    margin-left: 10em;
+}
+#title__app{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 2em;
+}
 .route__title {
+   
     font-weight: bold;
     color: #f7a20e;
     text-decoration: none;
-    padding: .5em;
+    
 }
-
 .route__title:hover {
     color: #e69f1c;
 }
@@ -25,5 +47,5 @@
 }
 
 .routes:hover{
-    color: #d8bf92;
+    color: #ffbe4d;
 }

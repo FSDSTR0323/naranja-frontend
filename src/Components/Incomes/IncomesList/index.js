@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap'
 import '../IncomesList/IncomeList.css'
 import jwt_decode from 'jwt-decode';
 const jwtSecret = process.env.JWT_SECRET;
-
 const token = window.localStorage.getItem("token");
 
 
@@ -16,13 +15,12 @@ const IncomeList = ({refresh}) => {
 
         const decoded = jwt_decode(token, jwtSecret);
         var userId = decoded.id
-
        console.log(userId)
-       
         try {
             const {data} = await axios.get(`http://localhost:5000/api/v1/get-income/${userId}`);
             setIncomeList(data); 
             console.log("esto es data", data)
+           
         }catch ( error ){
             console.log('Error get Income', error)
         }
@@ -37,9 +35,9 @@ const IncomeList = ({refresh}) => {
         }
     }
     
-    useEffect(()=>{
-        incomesGetter()
-    },[refresh]) 
+    // useEffect(()=>{
+    //     incomesGetter()
+    // },[refresh]) 
      
 
     const IncomeCard = ({title, amount, date, category, description, _id }) => (

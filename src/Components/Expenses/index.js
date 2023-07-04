@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Menu from '../Menu';
 import ExpenseList from './ExpenseList';
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
 
@@ -33,7 +33,7 @@ const FormExpense = () => {
 
       
         try {
-            await axios.post(`http://localhost:5000/api/v1/add-expense/${userId}`, {title, amount, description, category, date});
+            await axios.post(`${backendUrl}/api/v1/add-expense/${userId}`, {title, amount, description, category, date});
             toggle(!refresh)
                 console.log("aaaa")
             

@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 import { dateFormat } from '../../utils/dateFormat';
 const jwtSecret = process.env.JWT_SECRET;
 const token = window.localStorage.getItem("token");
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const IncomeList = ({refresh}) => {
 
@@ -18,7 +18,7 @@ const IncomeList = ({refresh}) => {
         let userId = decoded.id
        console.log(userId)
         try {
-            const {data} = await axios.get(`http://localhost:5000/api/v1/get-income/${userId}`);
+            const {data} = await axios.get(`${backendUrl}/api/v1/get-income/${userId}`);
             setIncomeList(data); 
             console.log("esto es data", data)
            
@@ -32,7 +32,7 @@ const IncomeList = ({refresh}) => {
 
     const handleDeleteIncome = async (_id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/v1/delete-income/${_id}`);
+            await axios.delete(`${backendUrl}/api/v1/delete-income/${_id}`);
             incomesGetter()
         } catch (error){
             console.log(error)
@@ -42,7 +42,7 @@ const IncomeList = ({refresh}) => {
     //MODIFY INCOME PENDIENTE ***
     const handleModifyIncome = async (_id) => {
         try {
-            await axios.put(`http://localhost:5000/api/v1/delete-income/${_id}`);
+            await axios.put(`${backendUrl}/api/v1/delete-income/${_id}`);
             incomesGetter()
         } catch (error){
             console.log(error)

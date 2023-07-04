@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
-const jwtSecret = process.env.JWT_SECRET;
 
 const Login = () => {
 

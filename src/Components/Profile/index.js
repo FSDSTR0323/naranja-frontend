@@ -8,7 +8,6 @@ import { NavLink } from 'react-router-dom';
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
- 
 
 
 const Profile = ({refresh}) => {
@@ -67,8 +66,8 @@ const Profile = ({refresh}) => {
     }
 
 // Traer datos del back
-    const avatarGetter = async (_id)=> {
-        const userId = window.localStorage.getItem("userId");
+    const avatarGetter = async ()=> {
+        let userId = window.localStorage.getItem('userId') 
        console.log(userId)
         try {
             const {data} = await axios.get(`${backendUrl}/user/${userId}`);
@@ -81,6 +80,7 @@ const Profile = ({refresh}) => {
 
     useEffect(() => {
       avatarGetter()
+        console.log('avatar get')
     }, [])
     
     

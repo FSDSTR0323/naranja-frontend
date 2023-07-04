@@ -5,6 +5,7 @@ import '../Incomes/Income.css';
 import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const FormIncome = () => {
 
@@ -30,7 +31,7 @@ const FormIncome = () => {
 
       
         try {
-            await axios.post(`http://localhost:5000/api/v1/add-income/${userId}`, {title, amount, description, category, date});
+            await axios.post(`${backendUrl}/api/v1/add-income/${userId}`, {title, amount, description, category, date});
             toggle(!refresh)
                 console.log("aaaa")
             

@@ -5,7 +5,7 @@ import '../ExpenseList/ExpenseList.css'
 import jwt_decode from 'jwt-decode';
 const jwtSecret = process.env.JWT_SECRET;
 const token = window.localStorage.getItem("token");
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
 
@@ -22,7 +22,7 @@ const ExpenseList = ({refresh}) => {
     // const userId = window.localStorage.getItem("userId");
     console.log(userId)
       try {
-          const {data} = await axios.get(`http://localhost:5000/api/v1/get-expense/${userId}`);
+          const {data} = await axios.get(`${backendUrl}/api/v1/get-expense/${userId}`);
           setExpenseList(data); 
           console.log("esto es data", data)
          
@@ -33,7 +33,7 @@ const ExpenseList = ({refresh}) => {
 
   const handleDeleteExpense = async (_id) => {
       try {
-          await axios.delete(`http://localhost:5000/api/v1/delete-expense/${_id}`);
+          await axios.delete(`${backendUrl}/api/v1/delete-expense/${_id}`);
           expensesGetter()
       } catch (error){
           console.log(error)

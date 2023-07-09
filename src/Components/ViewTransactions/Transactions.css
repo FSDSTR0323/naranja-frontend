@@ -1,0 +1,37 @@
+
+
+
+.transactions__container{
+  display: flex;
+  flex-direction: column;
+  margin: 3em;
+  border: 3px solid rgb(255, 253, 253);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background: #ffffffae;
+  border-radius: 10px;
+  height: 100vh;
+}
+
+h2 {
+  color: #f7a20e;
+  margin: .5em;
+}
+
+.transaction_card{
+  display: flex;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #e4e0e0bb;
+  }

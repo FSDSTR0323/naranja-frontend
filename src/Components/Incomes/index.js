@@ -1,33 +1,33 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import '../Incomes/Income.css';
 // import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
+// import { AppContext } from '../context/globalContext';
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const FormIncome = () => {
 
     const [refresh, toggle] = useState(false);
+    const [incomeList, setIncomeList] = useState([])
+
+    const [error, setError] = useState('');
 
     const [title, setTitle] = useState('');
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
 
-    const handleAmountChange = (event) => {
-        const value = parseFloat(event.target.value);
-        setAmount(value);
-      };
+
 //sustituir peticiones***
     const addIncome = async () => {
-        console.log("hola")
-
+        console.log('hola')
         let userId = window.localStorage.getItem('userId')
 
-       console.log(userId, title, amount, description, category, date)
+       console.log('ndgnkd', userId, title, amount, description, category, date)
 
       
         try {
@@ -36,9 +36,12 @@ const FormIncome = () => {
                 console.log("aaaa")
             
         } catch (error) {
+            setError(error.response.data.error)
+            console.log('error income', error.response.data)
             console.error('Error create Income', error)
         }
     };
+
 
   return (
     <>
@@ -60,7 +63,7 @@ const FormIncome = () => {
                     <Form.Control value={title} onChange={e => setTitle(e.currentTarget.value)}required className='add__income' type='text' placeholder='Add Income' />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Control value={amount} onChange={handleAmountChange} required className='amount' type='number' placeholder='Add Amount' />
+                    <Form.Control value={amount} onChange={e => setAmount(e.currentTarget.value)} required className='amount' type='text' placeholder='Add Amount' />
                 </Form.Group>
                 <Form.Group>
                     <Form.Control value={date} onChange={e => setDate(e.currentTarget.value)} className='date' type='date' />
@@ -82,6 +85,7 @@ const FormIncome = () => {
                     <Form.Control value={description} onChange={e => setDescription(e.currentTarget.value)} className='amount' as='textarea' placeholder='Add description' />
                 </Form.Group> <br/>
                 <Button type='submit' onClick={addIncome} id='button__add' variant="outline-primary">Add Income</Button>
+                {error &&  <p id='err__msg'>{error}</p>}
             </Form>
             
         <div id='income__list__container'>

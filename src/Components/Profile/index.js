@@ -67,7 +67,7 @@ const Profile = ({refresh}) => {
 
 // Traer datos del back
     const avatarGetter = async ()=> {
-        let userId = window.localStorage.getItem('userId') 
+        const userId = window.localStorage.getItem('userId') 
        console.log(userId)
         try {
             const {data} = await axios.get(`${backendUrl}/user/${userId}`);

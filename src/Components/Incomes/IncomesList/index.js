@@ -1,78 +1,164 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
 import '../IncomesList/IncomeList.css'
 import { dateFormat } from '../../utils/dateFormat';
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-const IncomeList = ({refresh}) => {
+const IncomeList = ({ refresh }) => {
+  const [incomeList, setIncomeList] = useState([]);
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del pop-up
+  const [selectedIncome, setSelectedIncome] = useState(null); // Estado para almacenar el gasto seleccionado
 
-    const [incomeList, setIncomeList] = useState([])
-
-    const incomesGetter = async ()=> {
-
-        const userId = window.localStorage.getItem("userId");
-       console.log(userId)
-        try {
-            const {data} = await axios.get(`${backendUrl}/api/v1/get-income/${userId}`);
-            setIncomeList(data); 
-            console.log("esto es data", data)
-           
-        }catch ( error ){
-            console.log('Error get Income', error)
-        }
-    };   
-    useEffect(()=>{
-        incomesGetter()
-    },[refresh]) 
-
-    const handleDeleteIncome = async (_id) => {
-        try {
-            await axios.delete(`${backendUrl}/api/v1/delete-income/${_id}`);
-            incomesGetter()
-        } catch (error){
-            console.log(error)
-        }
+  const incomesGetter = async () => {
+    const userId = window.localStorage.getItem('userId');
+    try {
+      const { data } = await axios.get(`${backendUrl}/api/v1/get-income/${userId}`);
+      setIncomeList(data);
+    } catch (error) {
+      console.log('Error get Income', error);
     }
+  };
 
-    //MODIFY INCOME PENDIENTE ***
-    const handleModifyIncome = async (_id) => {
-        try {
-            await axios.put(`${backendUrl}/api/v1/delete-income/${_id}`);
-            incomesGetter()
-        } catch (error){
-            console.log(error)
-        }
+  useEffect(() => {
+    incomesGetter();
+  }, [refresh]);
+
+  const handleDeleteIncome = async (_id) => {
+    try {
+      await axios.delete(`${backendUrl}/api/v1/delete-income/${_id}`);
+      incomesGetter();
+    } catch (error) {
+      console.log(error);
     }
-    
-   
-     
+  };
 
-    const IncomeCard = ({title, amount, date, category, description, _id }) => (
-        
-        <div className='incomeList__container'>
-            <div id='items__incomes'>
-                    <div className='icon'>
-                    </div>
-                    <h5>{title}</h5>
-                    <p>{amount}</p>
-                    <date>{dateFormat(date)}</date>
-                    <p>{category}</p>
-                    <p>{description}</p>
-                    <Button type='submit' id='dltIncome' onClick={()=> handleDeleteIncome(_id)}>Delete</Button>
-                    <Button type='submit' id='mdfyIncome' onClick={()=> handleModifyIncome(_id)}>Modify</Button> 
-            </div>
-        
-        </div>
-    )
+  const handleModifyIncome = (_id) => {
+    const income = incomeList.find((item) => item._id === _id);
+    setSelectedIncome(income);
+    setShowModal(true);
+  };
 
-  
-  return (
-
-    <div className='income_card'>
-        {incomeList.map(income => <IncomeCard key={income._id} _id={income._id} title={income.title} amount={income.amount} date={income.date} category={income.category} description={income.description} > </IncomeCard>)}      
+  const IncomeCard = ({ title, amount, date, category, description, _id }) => (
+    <div className='incomeList__container'>
+      <div id='items__incomes'>
+        <div className='icon'></div>
+        <h5>{title}</h5>
+        <p>{amount}</p>
+        <date>{dateFormat(date)}</date>
+        <p>{category}</p>
+        <p>{description}</p>
+        <Button type='submit'variant='secondary' id='mdfyIncome' onClick={() => handleModifyIncome(_id)}>
+          Modify
+        </Button>
+        <Button type='submit' id='dltIncome' onClick={() => handleDeleteIncome(_id)}>
+          Delete
+        </Button>
+      </div>
     </div>
-)}
+  );
 
-export default IncomeList
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedIncome(null);
+  };
+
+  const handleSaveChanges = async () => {
+    try {
+      await axios.put(`${backendUrl}/api/v1/modify-income/${selectedIncome._id}`, selectedIncome);
+      handleCloseModal();
+      incomesGetter();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setSelectedIncome({ ...selectedIncome, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <div className='expense_card'>
+      {incomeList.map((expense) => (
+        <IncomeCard
+          key={expense._id}
+          _id={expense._id}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+          category={expense.category}
+          description={expense.description}
+        />
+      ))}
+    
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton className='modal__header'>
+          <Modal.Title className='title__popup'>Modify Income</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='modal__body'>
+          <div>
+            <label className='label__popup'>Title:</label>
+            <Form.Control
+              type='text'
+              name='title'
+              className='input__popup'
+              value={selectedIncome?.title || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className='label__popup'>Amount:</label>
+            <Form.Control
+              type='text'
+              name='amount'
+              className='input__popup'
+              value={selectedIncome?.amount || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className='label__popup'>Date:</label>
+            <Form.Control
+              type='text'
+              name='date'
+              className='input__popup'
+              value={selectedIncome?.date || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className='label__popup'>Category:</label>
+            <Form.Control
+              type='text'
+              name='category'
+              className='input__popup'
+              value={selectedIncome?.category || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label className='label__popup'>Description:</label>
+            <Form.Control
+              type='text'
+              name='description'
+              className='input__popup'
+              value={selectedIncome?.description || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer className='modal__footer'>
+          <Button variant='secondary' onClick={handleCloseModal}>
+            Close
+          </Button>
+          <Button  className='btn__saveChanges' onClick={handleSaveChanges}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
+
+export default IncomeList;

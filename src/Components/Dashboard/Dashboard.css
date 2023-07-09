@@ -3,42 +3,67 @@
     display: flex;
     flex-direction: column;
     margin: 3em;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 3px solid rgb(255, 253, 253);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     background: #ffffffae;
     border-radius: 10px;
 }
 
-.title__all__transactions {
+
+.title__all__transactions{
     margin: .5em;
     padding: .5em;
     color: #f7a20e;
 }
 
-.balance__title{
-    color: rgba(103, 103, 103, 0.733);
-    /* font-weight: bold; */
-    margin-left: 6.3em;
-    
+h6{
+    color: #ffbe4d;
+    margin: 1em;
+    padding: 1em;
 }
-.balance{
-    display: inline-block;
-    background: #efeded63;
-    font-weight: bold;
-    font-size: 50px;
-    text-align: center;
+label {
+    color: #ffbe4d;
+    text-align: start;
+    font-size: 20px;
     margin-left: 2em;
-    width: 500px;
+    padding: .5em;
 }
 
-.chart__container {
-    border-radius: 5px;
-    padding: 1em;
-    max-width: 800px;
-    height: auto;
-    width: auto;
+.lineChartAndHistory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .amount__container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     margin-left: 2em;
     color:#ffbe4d ;
 }
+.total__incomes, .total__expenses, .total__balance{
+    border: 3px solid rgb(255, 253, 253);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: #f8f6f64c;
+    border-radius: 10px;
+    margin: 1em;
+    width: 17rem;
+    text-align: center;
+}
+
+
+.totalIncomeResult, .totalExpenseResult, .totalBlanceResult{
+    font-size: 25px;
+    font-weight: bold;
+    margin: .5em;
+    text-align: center;
+}
+.total__balance {
+    color: #27de02;
+}
+
+
+
+
+

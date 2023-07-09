@@ -1,9 +1,32 @@
 
 
+
 .history__container{
     display: flex;
-    flex-direction: column;
-    text-align: end;
-    margin-right: 100px;
-    color: #ffbe4d;
+    position: relative;
+    justify-content: end;
 }
+
+#history__card {
+    border-radius: 10px;
+    border: 3px solid rgb(255, 253, 253);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: #f8f6f64c;
+    margin: 1em;
+    text-align: center;
+    padding: 1em;
+}
+#title__recent__history{
+    color: #ffbe4d;
+    padding-bottom: 1em;
+    
+}
+#items__historys{
+    display: flex;
+    
+    gap: 2em;
+    flex-wrap: wrap;
+    padding-bottom: .5em;
+}
+
+

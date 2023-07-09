@@ -1,5 +1,20 @@
-.chart {
-    margin: .5em;
-    padding:.5em;
-    min-width: 350px;
+.lineChart__container{
+    border-radius: 10px;
+    border: 3px solid rgb(255, 253, 253);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: #f8f6f64c;
+    display: flex;
+    align-items: center;
+    width: 600px;
+    margin: 1em;
+    padding: 1em;
+}
+
+.pieChart__container {
+    border: 3px solid rgb(255, 253, 253);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: #f8f6f64c;
+    border-radius: 10px;
+    margin: 1em;
+    padding: 1em;
 }

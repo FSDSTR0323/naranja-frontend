@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import '../Expenses/style.css';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Menu from '../Menu';
 import ExpenseList from './ExpenseList';
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
@@ -13,23 +14,22 @@ const FormExpense = () => {
 
     const [refresh, toggle] = useState(false);
 
+    const [error, setError] = useState('');
+
     const [title, setTitle] = useState('');
-    const [amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState('');
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [date, setDate] = useState('');
 
-    const handleAmountChange = (event) => {
-        const value = parseFloat(event.target.value);
-        setAmount(value);
-      };
-//sustituir peticiones***
+
+// sustituir peticiones***
     const addExpense = async () => {
-        console.log("hola")
+        console.log('hola')
 
         let userId = window.localStorage.getItem('userId')
 
-       console.log(userId, title, amount, description, category, date)
+       console.log('dafsasf', userId, title, amount, description, category, date)
 
       
         try {
@@ -38,6 +38,7 @@ const FormExpense = () => {
                 console.log("aaaa")
             
         } catch (error) {
+            setError(error.response.data.error)
             console.error('Error create Expense', error)
         }
     };
@@ -61,7 +62,7 @@ const FormExpense = () => {
                         <Form.Control value={title} onChange={e => setTitle(e.currentTarget.value)}required className='add__expense' type='text' placeholder='Add Expense' />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Control value={amount} onChange={handleAmountChange} required className='amount' type='number' placeholder='Add Amount' />
+                        <Form.Control value={amount} onChange={e => setAmount(e.currentTarget.value)} required className='amount' type='text' placeholder='Add Amount' />
                     </Form.Group>
                     <Form.Group>
                         <Form.Control value={date} onChange={e => setDate(e.currentTarget.value)} className='date' type='date' />
@@ -83,6 +84,7 @@ const FormExpense = () => {
                         <Form.Control value={description} onChange={e => setDescription(e.currentTarget.value)} className='amount' as='textarea' placeholder='Add description' />
                     </Form.Group> <br/>
                     <Button type='submit' onClick={addExpense} id='button__add' variant="outline-primary">Add Expense</Button>
+                    {error &&  <p id='err__msg'>{error}</p>}
                 </Form>
                 
             <div id='expense__list__container'>

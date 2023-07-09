@@ -41,12 +41,15 @@
     color: #f7a20e;
 }
 
-.modal__header, .modal__footer{
+.modal__header{
     background: #000000c9;
 }
 
 .modal__body {
     background: #000000d4;
+}
+#modal__footer{
+    background: #000000c9;
 }
 
 .input__popup {
@@ -58,16 +61,15 @@
     font-size: 15px;
 }
 
-.btn__saveChanges{
+#btn__saveChanges{
     color: #fff;
     background: #f7a20e;
     border: none;
 }
 
-.btn__saveChanges:hover {
+#btn__saveChanges:hover {
     background: #ffbe4d;
 }
-
-.btn__saveChanges:active {
+#btn__saveChanges:active {
     background: #d8bf92;
   }

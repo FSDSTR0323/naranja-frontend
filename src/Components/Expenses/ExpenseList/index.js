@@ -66,7 +66,7 @@ const ExpenseList = ({ refresh }) => {
 
   const handleSaveChanges = async () => {
     try {
-      await axios.put(`${backendUrl}/api/v1/modify-expense/${selectedExpense._id}`, selectedExpense);
+      await axios.put(`${backendUrl}/api/v1/update-expense/${selectedExpense._id}`, selectedExpense);
       handleCloseModal();
       expensesGetter();
     } catch (error) {
@@ -120,7 +120,7 @@ const ExpenseList = ({ refresh }) => {
           <div>
             <label className='label__popup'>Date:</label>
             <Form.Control
-              type='text'
+              type='date'
               name='date'
               className='input__popup'
               value={selectedExpense?.date || ''}
@@ -148,11 +148,11 @@ const ExpenseList = ({ refresh }) => {
             />
           </div>
         </Modal.Body>
-        <Modal.Footer className='modal__footer'>
+        <Modal.Footer id='modal__footer'>
           <Button variant='secondary' onClick={handleCloseModal}>
             Close
           </Button>
-          <Button  className='btn__saveChanges' onClick={handleSaveChanges}>
+          <Button  id='btn__saveChanges' onClick={handleSaveChanges}>
             Save Changes
           </Button>
         </Modal.Footer>

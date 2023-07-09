@@ -66,7 +66,7 @@ const IncomeList = ({ refresh }) => {
 
   const handleSaveChanges = async () => {
     try {
-      await axios.put(`${backendUrl}/api/v1/modify-income/${selectedIncome._id}`, selectedIncome);
+      await axios.put(`${backendUrl}/api/v1/update-income/${selectedIncome._id}`, selectedIncome);
       handleCloseModal();
       incomesGetter();
     } catch (error) {
@@ -79,16 +79,16 @@ const IncomeList = ({ refresh }) => {
   };
 
   return (
-    <div className='expense_card'>
-      {incomeList.map((expense) => (
+    <div className='income_card'>
+      {incomeList.map((income) => (
         <IncomeCard
-          key={expense._id}
-          _id={expense._id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-          category={expense.category}
-          description={expense.description}
+          key={income._id}
+          _id={income._id}
+          title={income.title}
+          amount={income.amount}
+          date={income.date}
+          category={income.category}
+          description={income.description}
         />
       ))}
     
@@ -120,7 +120,7 @@ const IncomeList = ({ refresh }) => {
           <div>
             <label className='label__popup'>Date:</label>
             <Form.Control
-              type='text'
+              type='date'
               name='date'
               className='input__popup'
               value={selectedIncome?.date || ''}
@@ -148,11 +148,11 @@ const IncomeList = ({ refresh }) => {
             />
           </div>
         </Modal.Body>
-        <Modal.Footer className='modal__footer'>
+        <Modal.Footer id='modal__footer'>
           <Button variant='secondary' onClick={handleCloseModal}>
             Close
           </Button>
-          <Button  className='btn__saveChanges' onClick={handleSaveChanges}>
+          <Button  id='btn__saveChanges' onClick={handleSaveChanges}>
             Save Changes
           </Button>
         </Modal.Footer>

@@ -8,9 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 library.add(faBars, faTimes);
 
+
+const getImage = window.localStorage.getItem("imageUrl");
     // Logout
     const logout = () => {
       localStorage.removeItem('token')
+      localStorage.removeItem('imageUrl')
       localStorage.removeItem('userId')
   }
 
@@ -28,7 +31,7 @@ const Menu = () => {
         <NavLink className='routes' to='/profile'>
           <img id='user__avatar' 
             className='routes' to='/profile'
-            src='https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_081-account-user-profile-avatar-512.png' 
+            src= {getImage}
             alt='Bootstrap 5'/>
         </NavLink>
       </div>

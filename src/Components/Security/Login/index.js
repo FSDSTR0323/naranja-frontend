@@ -3,7 +3,7 @@ import { Button, Container, Form, Navbar} from 'react-bootstrap'
 import './Login.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import imageUrl from '../../Profile/index'
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
@@ -22,10 +22,13 @@ const Login = () => {
       console.log('vemos response', response)
       //Autentification
       const token = response.data.token;
-
+      const imageUrl = response.data.user.image
       const userId = response.data.user.id
+      // console.log('response data: ', response.data)
+      console.log('response data user: ', response.data.user.image)
       window.localStorage.setItem('token', token);
       window.localStorage.setItem("userId", userId)
+      window.localStorage.setItem("imageUrl", imageUrl)
 
     }catch (error) {
       console.log('This is error', error)

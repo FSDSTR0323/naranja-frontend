@@ -67,8 +67,10 @@ const Register = () => {
          const response = await axios.post(`${backendUrl}/register`, {email, password, name, surName, gender, birthdate, image })
           const token = response.data.token;
           const userId = response.data.user.id
+          const imageUrl = image
           window.localStorage.setItem('token', token);
           window.localStorage.setItem("userId", userId)
+          window.localStorage.setItem("imageUrl", imageUrl)
         }catch (error) {
           setError(error.response.data.error)
         }

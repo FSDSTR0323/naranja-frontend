@@ -32,6 +32,8 @@ const Profile = ({refresh}) => {
 
     const logout = () => {
         localStorage.removeItem('token')
+        localStorage.removeItem('imageUrl')
+        localStorage.removeItem('userId')
     }
 
     
@@ -69,19 +71,22 @@ const Profile = ({refresh}) => {
     }, [])
 
     const  updateUser = async () => {
-            
         const userId = window.localStorage.getItem("userId");
         console.log(userId)
 
         try{
             const {data} = await axios.post(`${backendUrl}/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image })
-          // window.location.href = '/dashboard';
+            const imageUrl = image
+            console.log('imageurl', imageUrl)
+          window.localStorage.setItem('imageUrl', imageUrl)
           setUserInfo(data)
           setError('')
         }catch (error) {
           setError(error.response.data.error)
         }
       }
+
+      const getImage = window.localStorage.getItem("imageUrl");
 
       useEffect(() => {
         avatarGetter()
@@ -161,7 +166,7 @@ const Profile = ({refresh}) => {
             <div id='container__avatar'>
                 <p id='texto'>Add File</p>
                 <input type="file" id='input__img' onChange={UploadAvatar}/>
-                {image && <img className='newImg__avatar' src={image} alt='' />} 
+                {getImage && <img className='newImg__avatar' src={getImage} alt='' />} 
             </div>
      
         <div className='form__user'>
@@ -222,7 +227,7 @@ const Profile = ({refresh}) => {
                 </Form.Group>
 
                 <Form.Group controlId="formInlineInputPostCode">
-                    <Form.Label  className='text-danger' id='label'>PostCode:</Form.Label>
+                    <Form.Label  className='text-danger' id='label'>Postcode:</Form.Label>
                     <Form.Control id='postCode' placeholder={userInfo.postCode}  onChange={e => setPostCode(e.currentTarget.value)} type='text' size='md' />
                     {errors.postCode && <div className="alert alert-warning p-1">{errors.postCode}</div>}
                 </Form.Group>

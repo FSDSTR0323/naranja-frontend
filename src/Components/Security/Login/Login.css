@@ -6,8 +6,8 @@
 
 #sign-in-form {
     max-width: 500px;
-     margin-top: 5em;
-     height: 89vh;
+    margin-top: 5em;
+    height: 89vh;
   }
   
   .bootstrap-logo {
@@ -21,6 +21,11 @@
 
   .enterAccount__title {
     font-weight: bolder !important;
+  }
+  .rememberMe {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
   }
 
   .btn__signIn {

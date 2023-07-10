@@ -12,14 +12,11 @@
   height: 100vh;
 }
 
-h2 {
-  color: #f7a20e;
-  margin: .5em;
+.title__transaction {
+  color: #f7a20e ;
+  margin: 2em;
 }
 
-.transaction_card{
-  display: flex;
-}
 .table {
   width: 100%;
   border-collapse: collapse;

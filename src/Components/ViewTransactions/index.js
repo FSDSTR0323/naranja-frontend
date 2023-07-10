@@ -45,8 +45,8 @@ const TransactionList = ({ refresh }) => {
       <Menu />
 
       <div className='transactions__container'>
-        <div className='title_transaction'>
-          <h2>Transactions</h2>
+        <div className='title__transaction'>
+          <h2 id='title__transactions'>Transactions</h2>
         </div>
         <table className='table'>
           <thead>

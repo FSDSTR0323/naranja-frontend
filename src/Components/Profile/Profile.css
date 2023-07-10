@@ -3,20 +3,19 @@
 .user__container {
   display: flex;
   flex-wrap: wrap;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 3em;
+  border: 3px solid rgb(255, 253, 253);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   background: #ffffffae;
   border-radius: 10px;
-  margin: 3em;
   
 }
 
 .form__user{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: 2em;
-
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+margin-left: 1em;
 }
 
 .custom__form__user {
@@ -24,7 +23,10 @@
   flex-wrap: wrap;
 }
 #container__avatar {
-margin: 5em;
+  margin-right: 20em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 
@@ -37,15 +39,24 @@ margin: 5em;
 
 .container__group{
   display: flex;
-  align-content: center;
-  gap: 4em;
+  gap: 2em;
+}
+
+#email, #city, #birthdate, #address{
+  width: 280px;
+}
+#gender, #password {
+  width: 300px;
+}
+#postCode {
+  width: 300px;
 }
 
 .container__last__group{
+  width: 300px;
   display: flex;
-  align-content: center;
+  gap: 2em;
   margin-bottom: 1em;
-  gap: 4em;
 }
 
 .newImg__avatar {
@@ -85,31 +96,38 @@ margin: 5em;
 
 .msg__signout__account{
  text-align: center;
+ margin:  1em;
 }
 
 #container__avatar {
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
   padding: 10px;
-  width: 150px;
+  width: 200px;
   height: 50px;
   background-color: #f7a20e;;
   cursor: pointer;
-  border-radius:5px;
+  border-radius: 10px;
   box-shadow: 0px 1px 2px 1px #00000077;
 }
+
+.newImg__avatar{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-top: 2em;
+}
 #texto{
-  text-align: center;
+  cursor: pointer;
   color: #fff;
 }
 
 #input__img {
+  cursor: pointer;
   position: absolute;
-  padding: 1em;  
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
   opacity: 0;
+}
+
+#input__img:hover {
+  color: #ffbe4d;
 }

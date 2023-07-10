@@ -53,14 +53,16 @@ const Login = () => {
         <Form.Control value={password} onChange={e => setPasword(e.currentTarget.value)} type='password' size='lg' placeholder='Password' autoComplete='current-password' className='position-relative' />
       </Form.Group>
       <Form.Group className='d-flex justify-content-center mb-4' controlId='remember-me'>
-        <Form.Check label='Remember me'/>
-      </Form.Group >
+        <Form.Check label='Remember me' className='rememberMe'/>
+      </Form.Group>
       <Form.Group className='d-flex justify-content-center mb-4'>
           <Navbar.Text ><a className='create__account' href='/register'>Create Account</a></Navbar.Text>
       </Form.Group>
+      
       <div className='d-grid'>
         <Button onClick={handleClick} variant='primary' size='lg' className='btn__signIn'>Sign In</Button>
       </div>
+      
       {error &&  <p id='err__msg'>{error}</p>}
       <p className='mt-5 text-muted'>&copy; 2023-2023</p>
     </Form>

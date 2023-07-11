@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { dateFormat } from '../../utils/dateFormat';
-import { Button } from 'react-bootstrap';
 import '../History/History.css'
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
@@ -10,7 +9,6 @@ const HistoryList = ({ refresh }) => {
   
   const [historyList, setHistoryList] = useState([]);
 
-  const [content, setContent] = useState('')
 
   const historysGetter = async () => {
     const userId = window.localStorage.getItem('userId');

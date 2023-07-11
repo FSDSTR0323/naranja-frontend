@@ -1,3 +1,11 @@
+#expense__card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+
 .expenseList__container {
     display: flex;
     background: #ffffff9f;
@@ -6,10 +14,12 @@
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
     border-radius: 20px;
     margin-bottom: 1rem;
-    margin-right: 30em;
+
 }
 #items__expenses {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 3em;
 }
 

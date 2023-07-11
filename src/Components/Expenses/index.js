@@ -12,6 +12,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const FormExpense = () => {
 
+    const [expenseList, setExpenseList] = useState([])
     const [refresh, toggle] = useState(false);
 
     const [error, setError] = useState('');
@@ -25,13 +26,9 @@ const FormExpense = () => {
 
 // sustituir peticiones***
     const addExpense = async () => {
-        console.log('hola')
 
         let userId = window.localStorage.getItem('userId')
 
-       console.log('dafsasf', userId, title, amount, description, category, date)
-
-      
         try {
             await axios.post(`${backendUrl}/api/v1/add-expense/${userId}`, {title, amount, description, category, date});
             toggle(!refresh)
@@ -39,21 +36,26 @@ const FormExpense = () => {
             
         } catch (error) {
             setError(error.response.data.error)
-            console.error('Error create Expense', error)
         }
     };
+    const totalExpenses = expenseList.reduce((total, expense) => {
+        const amount = expense.amount.replace(/[$€]/g,''); 
+        // console.log('amount:', amount)
+        return total + Number(amount);
+      }, 0);
+      console.log('amount:', amount)
 
     return (
         <>
         <Menu/>
     
-        <div className='main__container'>
+        <div id='expense__container'>
             <div className='title_expense'>
                 <h2>Expenses</h2>
             </div>
     
             <div className='total__expense'>
-            <Form.Control as='input'  size='lg' disabled readOnly/>
+            <Form.Control  id='totalExpenses' value={totalExpenses} size='lg' disabled readOnly/>
             </div>
             <div id='form__container__expense'>
                 <Form  className='custom__form__expense'>

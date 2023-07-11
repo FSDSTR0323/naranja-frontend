@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import '../Incomes/Income.css';
-// import { useForm } from 'react-hook-form';
+
 import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
-// import { AppContext } from '../context/globalContext';
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const FormIncome = () => {
@@ -27,8 +27,6 @@ const FormIncome = () => {
         console.log('hola')
         let userId = window.localStorage.getItem('userId')
 
-       console.log('ndgnkd', userId, title, amount, description, category, date)
-
       
         try {
             await axios.post(`${backendUrl}/api/v1/add-income/${userId}`, {title, amount, description, category, date});
@@ -47,7 +45,7 @@ const FormIncome = () => {
     <>
     <Menu/>
 
-    <div className='main__container'>
+    <div id='expense__container'>
         <div className='title_income'>
             <h2>Incomes</h2>
         </div>

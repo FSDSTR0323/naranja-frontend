@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Container, Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import Menu from '../Menu';
 import '../Profile/Profile.css'
 import axios from 'axios';
@@ -13,18 +13,16 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const Profile = ({refresh}) => {
     
     const [userInfo, setUserInfo] = useState([])
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState(false)
 
-    const [userImage, setUserImage] = useState();
+    // const [userImage, setUserImage] = useState();
     const [name, setName] = useState('');
     const [surName, setSurname] = useState('');
     const [birthdate, setBirthdate] = useState('');
     const [gender, setGender] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
-    const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
-    const [number, setNumber] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
     const [postCode, setPostCode] = useState('');
@@ -34,6 +32,18 @@ const Profile = ({refresh}) => {
         localStorage.removeItem('token')
         localStorage.removeItem('imageUrl')
         localStorage.removeItem('userId')
+    }
+
+    const deleteImage = async (_id) => {
+        
+        localStorage.removeItem('imageUrl')
+
+        try {
+          await axios.delete(`${backendUrl}/api/v1/delete-avatar/${_id}`);
+          avatarGetter()
+        } catch (error) {
+          console.log(error);
+      };
     }
 
     
@@ -52,6 +62,7 @@ const Profile = ({refresh}) => {
             const file = await res.json();
             setImage(file.secure_url)
     }
+    
 
 // Traer datos del back
     const avatarGetter = async ()=> {
@@ -75,7 +86,7 @@ const Profile = ({refresh}) => {
         console.log(userId)
 
         try{
-            const {data} = await axios.post(`${backendUrl}/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, phone, city, country, address, number, postCode, image })
+            const {data} = await axios.post(`${backendUrl}/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, city, country, address, postCode, image })
             const imageUrl = image
             console.log('imageurl', imageUrl)
           window.localStorage.setItem('imageUrl', imageUrl)
@@ -86,12 +97,14 @@ const Profile = ({refresh}) => {
         }
       }
 
-      const getImage = window.localStorage.getItem("imageUrl");
+    //   const getImage = window.localStorage.getItem("imageUrl");
 
       useEffect(() => {
         avatarGetter()
           console.log('avatar get')
       }, [])
+
+    
     
     
     
@@ -162,23 +175,26 @@ const Profile = ({refresh}) => {
             </div>
        
         <Form className='custom__form__user' noValidate onSubmit={handleSubmit}>
-
+      
             <div id='container__avatar'>
-                <p id='texto'>Add File</p>
                 <input type="file" id='input__img' onChange={UploadAvatar}/>
-                {getImage && <img className='newImg__avatar' src={getImage} alt='' />} 
+                
+                {image && <img className='newImg__avatar__profile' src={image} alt='' />}      
             </div>
-     
+            <div id='dltImg__container'>
+                <Button variant='secondary' id='dltImg' onClick={deleteImage} >Delete</Button>
+            </div>
+
         <div className='form__user'>
 
             <div className='container__group'>
-                <Form.Group className="mb-1" id='name__profile' controlId="formInlineInputName">
+                <Form.Group>
                     <Form.Label className='text-danger' id='label' >Name:</Form.Label>
                     <Form.Control required  name='name' placeholder={userInfo.name} onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size='md' /> 
                     {errors.name && <div className="alert alert-warning p-1">{errors.name}</div>}
                 </Form.Group>
 
-                <Form.Group className="mb-1" id='surName' controlId="formInlineInputsurName">
+                <Form.Group>
                     <Form.Label  className='text-danger' id='label'>Surname:</Form.Label>
                     <Form.Control id='surName' required  placeholder={userInfo.surName} onChange={e => setSurname(e.currentTarget.value)} name='surName' type='text' size='md' />
                     {errors.surName && <div className="alert alert-warning p-1">{errors.surName}</div>}
@@ -187,31 +203,31 @@ const Profile = ({refresh}) => {
             </div>
 
             <div className='container__group'>
-                <Form.Group id='birthdate' controlId="formInlineInputBirthdate">
+                <Form.Group>
                     <Form.Label  className='text-danger' id='label'>Birthdate:</Form.Label>
-                    <Form.Control size='md' required className='birthdate' placeholder={userInfo.birthdate} onChange={e => setBirthdate(e.currentTarget.value)} type='date' name='birthdate' />
+                    <Form.Control id='birthdate' size='md' required className='birthdate' placeholder={userInfo.birthdate} onChange={e => setBirthdate(e.currentTarget.value)} type='date' name='birthdate' />
                     {errors.birthdate && <div className="alert alert-warning p-1">{errors.birthdate}</div>}
                 </Form.Group>
 
-                <Form.Group className='gender__group'>
-                <Form.Label  className='text-danger' controlId="formInlineInputGender" id='label'>Gender:</Form.Label>
-                <Form.Select id='gender' >
-                    <option label="Male" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)}  required className='gender' name='gender'/>
-                    <option label="Female" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)} required className='gender' name='gender'/>
-                    <option label="Other" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)} required className='gender' name='gender'/>
-                    {errors.gender && <div className="alert alert-warning p-1">{errors.gender}</div>}
-                </Form.Select>
+                <Form.Group>
+                    <Form.Label  className='text-danger' id='label'>Gender:</Form.Label>
+                        <Form.Select id='gender'>
+                            <option label="Male" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)}  required className='gender' name='gender'/>
+                            <option label="Female" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)} required className='gender' name='gender'/>
+                            <option label="Other" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)} required className='gender' name='gender'/>
+                            {errors.gender && <div className="alert alert-warning p-1">{errors.gender}</div>}
+                        </Form.Select>
                 </Form.Group>
             </div>
            
             <div className='container__group'>
-                <Form.Group  controlId="formInlineInputEmail">
+                <Form.Group>
                     <Form.Label  className="text-danger" id='label'>Email:</Form.Label>
                     <Form.Control id="email" required  placeholder={userInfo.email} type="email" size='md'  autoComplete='user-name' name='email' onChange={e => setEmail(e.currentTarget.value)} />
                     {errors.email && <div className="alert alert-warning p-1">{errors.email}</div>}
                 </Form.Group>
 
-                <Form.Group className="mb-1" controlId="formInlineInputPassword" >
+                <Form.Group>
                     <Form.Label  className="text-danger" id='label'>Password:</Form.Label>
                     <Form.Control id='password' required type="password" size='md'  name='password' autoComplete="new-password" onChange={e => setPassword(e.currentTarget.value)}/>
                     {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
@@ -220,13 +236,13 @@ const Profile = ({refresh}) => {
         
 
             <div className='container__group'>
-                <Form.Group controlId="formInlineInputAddress">
-                    <Form.Label  className='text-danger' id='label'>Address:</Form.Label>
+                <Form.Group>
+                    <Form.Label className='text-danger' id='label'>Address:</Form.Label>
                     <Form.Control id='address' placeholder={userInfo.address} onChange={e => setAddress(e.currentTarget.value)} type='text' size='md'  autoComplete='address'  />
                     {errors.address && <div className="alert alert-warning p-1">{errors.address}</div>}
                 </Form.Group>
 
-                <Form.Group controlId="formInlineInputPostCode">
+                <Form.Group>
                     <Form.Label  className='text-danger' id='label'>Postcode:</Form.Label>
                     <Form.Control id='postCode' placeholder={userInfo.postCode}  onChange={e => setPostCode(e.currentTarget.value)} type='text' size='md' />
                     {errors.postCode && <div className="alert alert-warning p-1">{errors.postCode}</div>}
@@ -234,23 +250,24 @@ const Profile = ({refresh}) => {
             </div>
             
             <div className='container__last__group'> 
-                <Form.Group  controlId="formInlineInputCity">
+                <Form.Group >
                     <Form.Label  className='text-danger' id='label'>City:</Form.Label>
                     <Form.Control id='city' placeholder={userInfo.city} onChange={e => setCity(e.currentTarget.value)} type='text' size='md'/>
                     {errors.city && <div className="alert alert-warning p-1">{errors.city}</div>}
                 </Form.Group>
 
-                <Form.Group id='country__user' controlId="formInlineInputCountry">
+                <Form.Group>
                     <Form.Label  className='text-danger' id='label'>Country:</Form.Label>
-                    <Form.Control placeholder={userInfo.country} onChange={e => setCountry(e.currentTarget.value)} type='text' size='md' />
+                    <Form.Control id='country' placeholder={userInfo.country} onChange={e => setCountry(e.currentTarget.value)} type='text' size='md' />
                     {errors.country && <div className="alert alert-warning p-1">{errors.country}</div>}
                 </Form.Group>
             </div>
-            <Button type='submit' onClick={updateUser} className='btn__user' size='lg'  variant="outline-primary">Save All</Button>
+            <Button type='submit' onClick={updateUser} id='btn__saveAll' size='lg'>Save All</Button>
             {error &&  <p id='err__msg'>{error}</p>}
             <Form.Text className='msg__signout__account'>Would you like to log out of your account?<NavLink className='signout__register routes' to='/' onClick={logout}>Sign Out</NavLink> </Form.Text>
         </div>
         </Form>
+
         </div>
 
         </>

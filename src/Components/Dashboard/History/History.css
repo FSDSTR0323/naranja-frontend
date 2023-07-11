@@ -4,7 +4,7 @@
 .history__container{
     display: flex;
     position: relative;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 #history__card {

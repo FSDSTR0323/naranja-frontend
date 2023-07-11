@@ -1,15 +1,13 @@
 
 
-.main__container {
+#expense__container {
     background: #ffffffae;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    flex: 1;
-    /* border: 3px solid rgb(180, 180, 180); */
+    border: 3px solid rgb(255, 253, 253);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    overflow: auto;
     margin: 3em;
 }
 
@@ -74,5 +72,5 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: 3em;
-    width: 800px;
+    padding: 1em;
 }

@@ -23,7 +23,7 @@ const IncomeList = ({ refresh }) => {
 
   useEffect(() => {
     incomesGetter();
-  }, [refresh]);
+  }, []);
 
   const handleDeleteIncome = async (_id) => {
     try {

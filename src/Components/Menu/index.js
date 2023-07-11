@@ -44,6 +44,7 @@ const Menu = () => {
           </div>
           <div id='routes__menu'>
             <ul className={`menu-items ${isMenuOpen ? 'open' : ''}`}>
+
               <li><NavLink className='routes' to='/dashboard' href='#'>Dashboard</NavLink><div className='menu-text no-reverse'>Dashboard</div></li>
 
               <li><NavLink className='routes' to='/expenses'>Expenses</NavLink><span className='menu-text'>Expenses</span></li>

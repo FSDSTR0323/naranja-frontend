@@ -1,9 +1,16 @@
-
+#form__register {
+  display: flex;
+  justify-content: center;
+  padding-top: 3em;
+ 
+}
 
 .register__container{
     display: flex;
-    justify-content: center; 
- 
+}
+
+#container__avatar__register {
+  margin-left: 10em;
 }
 
 .text-danger {
@@ -12,13 +19,18 @@
     margin-right: 10em !important;
 }
 
+.inputsRegister {
+  background: #ffffff6c;
+}
 
 
 .custom__form__register {
-    display: grid;
+    display:flex;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    flex-direction: column;
     gap: .3em;
-    width: 25em;
-    margin-top: 3em;
     margin-bottom: 7em;
     padding: 1em;
     

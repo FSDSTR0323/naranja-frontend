@@ -2,9 +2,17 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-
 }
 
+#totalExpenses {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    color: red;
+}
 
 .expenseList__container {
     display: flex;
@@ -18,9 +26,8 @@
 }
 #items__expenses {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 3em;
+    gap: 1.4em;
 }
 
 .icon {

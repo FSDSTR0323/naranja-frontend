@@ -1,6 +1,4 @@
 
-
-
 #expense__container {
     background: #ffffffae;
     display: flex;
@@ -10,6 +8,24 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     margin: 3em;
+}
+
+#amount__totalExpenses {
+    display: flex;
+    border: 3px solid rgb(255, 253, 253);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+
+#total__expense, .title__totalExpense {
+    color: #ff0000;
+    font-weight: bold;
 }
 
 
@@ -27,12 +43,6 @@
     color: #f7a20e;
 }
 
-.total__expense {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 1em;
-    width: 100%;
-}
 
 .custom__form__expense  {
     display: flex;

@@ -79,7 +79,7 @@ const IncomeList = ({ refresh }) => {
   };
 
   return (
-    <div className='income_card'>
+    <div id='income__card'>
       {incomeList.map((income) => (
         <IncomeCard
           key={income._id}

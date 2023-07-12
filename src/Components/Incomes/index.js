@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import '../Incomes/Income.css';
 
@@ -40,6 +40,28 @@ const FormIncome = () => {
         }
     };
 
+    const incomesGetter = async () => {
+        const userId = window.localStorage.getItem('userId');
+        try {
+          const { data } = await axios.get(`${backendUrl}/api/v1/get-income/${userId}`);
+          setIncomeList(data);
+        } catch (error) {
+          console.log('Error get Income', error);
+        }
+      };
+
+  useEffect(() => {
+    incomesGetter();
+  }, []);
+
+  const totalIncome = incomeList.reduce((total, income) => {
+    const amount = income.amount.replace(/[$€]/g, '');
+    return total + Number(amount);
+  }, 0);
+
+
+
+
 
   return (
     <>
@@ -50,8 +72,9 @@ const FormIncome = () => {
             <h2>Incomes</h2>
         </div>
 
-        <div className='total__income'>
-        <Form.Control as='input'  size='lg' disabled readOnly/>
+         <div id='amount__totalIncomes'>
+          <h4 className='title__totalIncome'>Total Income:</h4>
+          <h1 id='total__income'>{totalIncome}</h1>
         </div>
         
         <div id='form__container__income'>

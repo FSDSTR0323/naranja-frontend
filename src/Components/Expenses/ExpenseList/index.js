@@ -40,11 +40,6 @@ const ExpenseList = ({ refresh }) => {
     setShowModal(true);
   };
 
-  const totalExpenses = expenseList.reduce((total, expense) => {
-    const amount = expense.amount.replace(/[$€]/g,''); 
-    console.log('amount:', amount)
-    return total + Number(amount);
-  }, 0);
 
   const ExpenseCard = ({ title, amount, date, category, description, _id }) => (
     <div className='expenseList__container'>
@@ -85,9 +80,12 @@ const ExpenseList = ({ refresh }) => {
   };
 
   return (
+  <>
+    
     <div id='expense__card'>
       {expenseList.map((expense) => (
         <ExpenseCard
+        
           key={expense._id}
           _id={expense._id}
           title={expense.title}
@@ -164,6 +162,7 @@ const ExpenseList = ({ refresh }) => {
         </Modal.Footer>
       </Modal>
     </div>
+  </>
   );
 };
 

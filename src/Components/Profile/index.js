@@ -34,17 +34,6 @@ const Profile = ({refresh}) => {
         localStorage.removeItem('userId')
     }
 
-    const deleteImage = async (_id) => {
-        
-        localStorage.removeItem('imageUrl')
-
-        try {
-          await axios.delete(`${backendUrl}/api/v1/delete-avatar/${_id}`);
-          avatarGetter()
-        } catch (error) {
-          console.log(error);
-      };
-    }
 
     
 //Cargar avatar profile
@@ -77,9 +66,9 @@ const Profile = ({refresh}) => {
     };   
 
     useEffect(() => {
-      avatarGetter()
-        console.log('avatar get')
-    }, [])
+        avatarGetter()
+          console.log('avatar get')
+      }, [])
 
     const  updateUser = async () => {
         const userId = window.localStorage.getItem("userId");
@@ -99,15 +88,21 @@ const Profile = ({refresh}) => {
 
     //   const getImage = window.localStorage.getItem("imageUrl");
 
-      useEffect(() => {
-        avatarGetter()
-          console.log('avatar get')
-      }, [])
 
-    
-    
-    
-    
+
+      
+      const deleteImage = async (_id) => {
+        localStorage.removeItem('imageUrl');
+
+        try {
+        await axios.delete(`${backendUrl}/api/v1/delete-avatar/${_id}`);
+        setImage(false);
+        avatarGetter();
+        window.location.reload(); // Actualizar la página
+        } catch (error) {
+        console.log(error);
+        }
+  };
  
 
     const initialData = {

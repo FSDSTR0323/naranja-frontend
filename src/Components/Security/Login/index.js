@@ -3,7 +3,6 @@ import { Button, Container, Form, Navbar} from 'react-bootstrap'
 import './Login.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import imageUrl from '../../Profile/index'
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 
@@ -29,9 +28,10 @@ const Login = () => {
       window.localStorage.setItem('token', token);
       window.localStorage.setItem("userId", userId)
       window.localStorage.setItem("imageUrl", imageUrl)
-
+      navigate("/dashboard")
     }catch (error) {
       console.log('This is error', error)
+      console.log('This is error', error.response.data.error)
       setError(error.response.data.error)
     }
       
@@ -39,7 +39,7 @@ const Login = () => {
   const navigate = useNavigate();
  async function handleClick(){
     await AuthLogin()
-    navigate("/dashboard")
+    
     
   }
   return (

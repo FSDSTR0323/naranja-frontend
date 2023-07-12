@@ -96,81 +96,86 @@ const Register = () => {
       const navigate = useNavigate();
       async function handleClick(){
          await AuthRegister()
-         
 
       }
+
+
+      
     return (
-        <div className='form__register'>
-        <Container className='register__container'>
+        <div id='form__register'>
+    
 
-        <Form.Group controlId="formFileSm" className="mb-3">
-            <Form.Control type="file" size="sm"  onChange={UploadAvatar} />
-            {(<img className='newImg__avatar' onChange={e => setUserImage(e.currentTarget.value)} src={image} alt=''/>)} 
-        </Form.Group>
+            <Form className='custom__form__register' noValidate onSubmit={handleSubmit}>
+                
 
+                <div className='avatar__register__title'>
+                    <h1 className="mb-1 fs-2 fw-normal register__title">Register</h1> 
+                    <p className='msg__create__account'>Create your account. It's free and only takes a minute.</p>
+                </div>
 
-        <Form className='custom__form__register' noValidate onSubmit={handleSubmit}>
-            <div className='avatar__register__title'>
-                <h1 className="mb-1 fs-2 fw-normal register__title">Register</h1> 
-                <p className='msg__create__account'>Create your account. It's free and only takes a minute.</p>
-            </div>
-            
-            <Form.Group className="mb-1">
-                <Form.Label className='text-danger' >* Name:</Form.Label>
-                <Form.Control required  name='name' onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size="lg" /> 
-                {errors.name && <div className="alert alert-warning p-1">{errors.name}</div>}
-            </Form.Group>
+                <div id='container__avatar__register'>
+                    <input type="file" id='input__img' onChange={UploadAvatar}/>
+                    
+                    {image && <img className='newImg__avatar__profile' src={image} alt='' />}      
+                </div>
+                
+                <Form.Group className="mb-1">
+                    <Form.Label className='text-danger' >* Name:</Form.Label>
+                    <Form.Control required  name='name' onChange={e => setName(e.currentTarget.value)}  className='inputsRegister' type='text' size="lg" /> 
+                    {errors.name && <div className="alert alert-warning p-1">{errors.name}</div>}
+                </Form.Group>
 
-            <Form.Group className="mb-1">
-                <Form.Label  className='text-danger'>* Surname:</Form.Label>
-                <Form.Control required className='surName'  onChange={e => setSurname(e.currentTarget.value)} name='surName' type='text' size="lg" />
-                {errors.surName && <div className="alert alert-warning p-1">{errors.surName}</div>}
-            </Form.Group>
+                <Form.Group className="mb-1">
+                    <Form.Label  className='text-danger'>* Surname:</Form.Label>
+                    <Form.Control required className='surName inputsRegister'  onChange={e => setSurname(e.currentTarget.value)} name='surName' type='text' size="lg" />
+                    {errors.surName && <div className="alert alert-warning p-1">{errors.surName}</div>}
+                </Form.Group>
 
-            <Form.Group>
-                <Form.Label  className='text-danger'>* Add your birthdate:</Form.Label>
-                <Form.Control size='lg' required className='birthdate' onChange={e => setBirthdate(e.currentTarget.value)} type='date' name='birthdate' />
-                {errors.birthdate && <div className="alert alert-warning p-1">{errors.birthdate}</div>}
-            </Form.Group>
+                <Form.Group>
+                    <Form.Label  className='text-danger'>* Add your birthdate:</Form.Label>
+                    <Form.Control size='lg' required className='birthdate inputsRegister' onChange={e => setBirthdate(e.currentTarget.value)} type='date' name='birthdate' />
+                    {errors.birthdate && <div className="alert alert-warning p-1">{errors.birthdate}</div>}
+                </Form.Group>
 
-            <Form.Group>
-            <Form.Label  className='text-danger'>* Select gender:</Form.Label>
-                <Form.Check label="Male" onChange={e => setGender(e.currentTarget.value)} value='male' size='lg' required className='gender' name='gender' type='radio'/>
-                <Form.Check label="Female" onChange={e => setGender(e.currentTarget.value)} value='female' size='lg' required className='gender' name='gender' type='radio' />
-                <Form.Check label="Other" onChange={e => setGender(e.currentTarget.value)} value='other' size='lg' required className='gender' name='gender' type='radio' />
-                {errors.gender && <div className="alert alert-warning p-1">{errors.gender}</div>}
-            </Form.Group>
+                <Form.Group>
+                    <Form.Label  className='text-danger' id='label'>Gender:</Form.Label>
+                        <Form.Select id='gender__profile' className='inputsRegister' size='lg'>
+                            <option label="Male" value='male' onChange={e => setGender(e.currentTarget.value)}  required className='gender' name='gender'/>
+                            <option label="Female" value='female' onChange={e => setGender(e.currentTarget.value)} required className='gender' name='gender'/>
+                            <option label="Other" value='other' onChange={e => setGender(e.currentTarget.value)} required className='gender' name='gender'/>
+                            {errors.gender && <div className="alert alert-warning p-1">{errors.gender}</div>}
+                        </Form.Select>
+                </Form.Group>
 
-            <Form.Group controlId="register__email__address">
-                <Form.Label  className="text-danger">* Add your email:</Form.Label>
-                <Form.Control required value={form.email}  type="email" size="lg" className="position-relative" autoComplete='user-name' name='email' onChange={handleChange} />
-                {errors.email && <div className="alert alert-warning p-1">{errors.email}</div>}
-            </Form.Group>
+                <Form.Group controlId="register__email__address">
+                    <Form.Label  className="text-danger">* Add your email:</Form.Label>
+                    <Form.Control required value={form.email}  type="email" size="lg" className="inputsRegister" autoComplete='user-name' name='email' onChange={handleChange} />
+                    {errors.email && <div className="alert alert-warning p-1">{errors.email}</div>}
+                </Form.Group>
 
-            <Form.Group controlId="register__confirm__email__address">
-                <Form.Label  className="text-danger">* Confirm email:</Form.Label>
-                <Form.Control required value={email} onChange={e => setEmail(e.currentTarget.value)} type="email" size="lg"  name='email' autoComplete='user-name' className="position-relative" />
-                {errors.email && <div className="alert alert-warning p-1">{errors.email}</div>}
-            </Form.Group>
+                <Form.Group controlId="register__confirm__email__address">
+                    <Form.Label  className="text-danger">* Confirm email:</Form.Label>
+                    <Form.Control required value={email} onChange={e => setEmail(e.currentTarget.value)} type="email" size="lg"  name='email' autoComplete='user-name' className="inputsRegister" />
+                    {errors.email && <div className="alert alert-warning p-1">{errors.email}</div>}
+                </Form.Group>
 
-            <Form.Group className="mb-1" controlId="register__password">
-                <Form.Label  className="text-danger">* Password:</Form.Label>
-                <Form.Control required value={form.password} type="password" size="lg"  className="position-relative" name='password' autoComplete="new-password" onChange={handleChange}/>
-                {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
-            </Form.Group>
+                <Form.Group className="mb-1" controlId="register__password">
+                    <Form.Label  className="text-danger">* Password:</Form.Label>
+                    <Form.Control required value={form.password} type="password" size="lg"  className="inputsRegister" name='password' autoComplete="new-password" onChange={handleChange}/>
+                    {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
+                </Form.Group>
 
-            <Form.Group className="mb-4" controlId="register__confirm__password">
-                <Form.Label  className="text-danger">* Confirm password:</Form.Label>
-                <Form.Control required value={password}  type="password" size="lg" onChange={e => setPassword(e.currentTarget.value)} name='password' autoComplete="new-password" className="position-relative" />
-                {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
-            </Form.Group>
+                <Form.Group className="mb-4" controlId="register__confirm__password">
+                    <Form.Label  className="text-danger">* Confirm password:</Form.Label>
+                    <Form.Control required value={password}  type="password" size="lg" onChange={e => setPassword(e.currentTarget.value)} name='password' autoComplete="new-password" className="inputsRegister" />
+                    {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
+                </Form.Group>
 
-            
-            <Button type='submit' onClick={handleClick} className='btn__register' size='lg'  variant="outline-primary">Register Now</Button>
-            {error &&  <p id='err__msg'>{error}</p>}
-            <Form.Text className='msg__create__account'>Already have an account? <a className='signin__register' href='/'>Sign in</a></Form.Text>
-        </Form>
-        </Container>
+                
+                <Button type='submit' onClick={handleClick} className='btn__register' size='lg'  variant="outline-primary">Register Now</Button>
+                {error &&  <p id='err__msg'>{error}</p>}
+                <Form.Text className='msg__create__account'>Already have an account? <a className='signin__register' href='/'>Sign in</a></Form.Text>
+            </Form>
         </div>
       )
     }

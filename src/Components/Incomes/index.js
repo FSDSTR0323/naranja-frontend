@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import '../Incomes/Income.css';
-// import { useForm } from 'react-hook-form';
+
 import axios from 'axios';
 import Menu from '../Menu';
 import IncomeList from './IncomesList';
-// import { AppContext } from '../context/globalContext';
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const FormIncome = () => {
@@ -27,8 +27,6 @@ const FormIncome = () => {
         console.log('hola')
         let userId = window.localStorage.getItem('userId')
 
-       console.log('ndgnkd', userId, title, amount, description, category, date)
-
       
         try {
             await axios.post(`${backendUrl}/api/v1/add-income/${userId}`, {title, amount, description, category, date});
@@ -42,18 +40,41 @@ const FormIncome = () => {
         }
     };
 
+    const incomesGetter = async () => {
+        const userId = window.localStorage.getItem('userId');
+        try {
+          const { data } = await axios.get(`${backendUrl}/api/v1/get-income/${userId}`);
+          setIncomeList(data);
+        } catch (error) {
+          console.log('Error get Income', error);
+        }
+      };
+
+  useEffect(() => {
+    incomesGetter();
+  }, []);
+
+  const totalIncome = incomeList.reduce((total, income) => {
+    const amount = income.amount.replace(/[$€]/g, '');
+    return total + Number(amount);
+  }, 0);
+
+
+
+
 
   return (
     <>
     <Menu/>
 
-    <div className='main__container'>
+    <div id='expense__container'>
         <div className='title_income'>
             <h2>Incomes</h2>
         </div>
 
-        <div className='total__income'>
-        <Form.Control as='input'  size='lg' disabled readOnly/>
+         <div id='amount__totalIncomes'>
+          <h4 className='title__totalIncome'>Total Income:</h4>
+          <h1 id='total__income'>{totalIncome}</h1>
         </div>
         
         <div id='form__container__income'>

@@ -1,16 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { dateFormat } from '../../utils/dateFormat';
-import { Button } from 'react-bootstrap';
 import '../History/History.css'
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const HistoryList = ({ refresh }) => {
-  
   const [historyList, setHistoryList] = useState([]);
-
-  const [content, setContent] = useState('')
 
   const historysGetter = async () => {
     const userId = window.localStorage.getItem('userId');
@@ -28,25 +24,18 @@ const HistoryList = ({ refresh }) => {
     historysGetter();
   }, [refresh]);
 
-
-
-
-
   return (
-    
     <div id='history__card'>
-
       <h3 id='title__recent__history'>Recent History</h3>
       
-      {historyList.map(({ _id, title, amount, date, category, description, type}) => (
-        <div key={_id} id='items__historys'>
+      {historyList.map(({ _id, title, amount, date, category, description, type }) => (
+        <div key={_id} id='items__historys' style={{ color: type === 'Expense' ? 'red' : 'green' }}>
           <div className='icon'></div>
           <h5>{title}</h5>
           <p>{amount}</p>
           <date>{dateFormat(date)}</date>
           <p>{category}</p>
           <p>{description}</p>
-         
         </div>
       ))}
     </div>

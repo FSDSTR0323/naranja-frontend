@@ -50,10 +50,10 @@ const Login = () => {
             alt='Bootstrap 5'/>
       <h1 className='mb-3 fs-4 fw-normal enterAccount__title'>Enter Account</h1>
       <Form.Group controlId='sign-in-email-address'>
-        <Form.Control value={email} onChange={e => setEmail(e.currentTarget.value)} type='email' size='lg' placeholder='Email address' autoComplete='username' className='position-relative' />
+        <Form.Control value={email} onChange={e => setEmail(e.currentTarget.value)} type='email' size='lg' placeholder='Email address' autoComplete='username' className='inputsRegister' />
       </Form.Group><br/>
       <Form.Group className="mb-3" controlId="sign-in-password">
-        <Form.Control value={password} onChange={e => setPasword(e.currentTarget.value)} type='password' size='lg' placeholder='Password' autoComplete='current-password' className='position-relative' />
+        <Form.Control value={password} onChange={e => setPasword(e.currentTarget.value)} type='password' size='lg' placeholder='Password' autoComplete='current-password' className='inputsRegister' />
       </Form.Group>
       <Form.Group className='d-flex justify-content-center mb-4' controlId='remember-me'>
         <Form.Check label='Remember me' className='rememberMe'/>

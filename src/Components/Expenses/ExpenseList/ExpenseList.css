@@ -1,3 +1,19 @@
+#expense__card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#totalExpenses {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    color: red;
+}
+
 .expenseList__container {
     display: flex;
     background: #ffffff9f;
@@ -6,11 +22,12 @@
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
     border-radius: 20px;
     margin-bottom: 1rem;
-    margin-right: 30em;
+
 }
 #items__expenses {
     display: flex;
-    gap: 3em;
+    flex-wrap: wrap;
+    gap: 1.4em;
 }
 
 .icon {

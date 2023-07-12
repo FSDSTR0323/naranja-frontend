@@ -23,7 +23,7 @@ const ExpenseList = ({ refresh }) => {
 
   useEffect(() => {
     expensesGetter();
-  }, [refresh]);
+  }, []);
 
   const handleDeleteExpense = async (_id) => {
     try {
@@ -39,6 +39,7 @@ const ExpenseList = ({ refresh }) => {
     setSelectedExpense(expense);
     setShowModal(true);
   };
+
 
   const ExpenseCard = ({ title, amount, date, category, description, _id }) => (
     <div className='expenseList__container'>
@@ -79,9 +80,12 @@ const ExpenseList = ({ refresh }) => {
   };
 
   return (
-    <div className='expense_card'>
+  <>
+    
+    <div id='expense__card'>
       {expenseList.map((expense) => (
         <ExpenseCard
+        
           key={expense._id}
           _id={expense._id}
           title={expense.title}
@@ -158,6 +162,7 @@ const ExpenseList = ({ refresh }) => {
         </Modal.Footer>
       </Modal>
     </div>
+  </>
   );
 };
 

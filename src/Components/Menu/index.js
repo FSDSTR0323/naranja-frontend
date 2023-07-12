@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 library.add(faBars, faTimes);
 
 
@@ -29,10 +30,7 @@ const Menu = () => {
       <div className='menu__container'>
         <div className='img__profile'>
         <NavLink className='routes' to='/profile'>
-          <img id='user__avatar' 
-            className='routes' to='/profile'
-            src= {getImage}
-            alt='Bootstrap 5'/>
+        <img className='newImg__avatar__menu' src={getImage ? getImage : 'https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_081-account-user-profile-avatar-512.png'} alt='' />
         </NavLink>
       </div>
         <div id='title__app'>
@@ -46,6 +44,7 @@ const Menu = () => {
           </div>
           <div id='routes__menu'>
             <ul className={`menu-items ${isMenuOpen ? 'open' : ''}`}>
+
               <li><NavLink className='routes' to='/dashboard' href='#'>Dashboard</NavLink><div className='menu-text no-reverse'>Dashboard</div></li>
 
               <li><NavLink className='routes' to='/expenses'>Expenses</NavLink><span className='menu-text'>Expenses</span></li>

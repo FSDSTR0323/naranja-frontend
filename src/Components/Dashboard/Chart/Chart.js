@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2';
-import Chart from '../Chart/Chart.css'
+import '../Chart/Chart.css'
 // import { dateFormat } from '../../utils/dateFormat';
 
 import {
@@ -49,21 +49,23 @@ const incomeDataGetter = async ()=> {
     const userId = window.localStorage.getItem('userId') 
     try {
         const response = await axios.get(`${backendUrl}/api/v1/get-income/${userId}`);
-        const amountData = response.data.map((item) => (item.amount))
-        const dates = response.data.map((item) => (item.date));
+        const amountDataIncome = response.data.map((item) => (item.amount))
+        const datesIncome = response.data.map((item) => (item.date));
     
-        console.log('esto es amountData', amountData)
+        console.log('esto es amountData', amountDataIncome)
         console.log('esto es getDate', getDateExpense)
-        setIncomeAmountData(amountData);
-        setGetDateIncome(dates)
+        setIncomeAmountData(amountDataIncome);
+        setGetDateIncome(datesIncome)
     }catch ( error ){
         console.log('Error get Transactions', error)
     }
 };  
-    
+
 useEffect(() => {
-    incomeDataGetter();
-}, []);
+  incomeDataGetter()
+}, [])
+
+    
 
 
 const expenseDataGetter = async ()=> {
@@ -71,23 +73,23 @@ const expenseDataGetter = async ()=> {
     const userId = window.localStorage.getItem('userId') 
     try {
         const response = await axios.get(`${backendUrl}/api/v1/get-expense/${userId}`);
-        const amountData = response.data.map((item) => (item.amount))
-        const dates = response.data.map((item) => (item.date));
+        const amountDataExpense = response.data.map((item) => (item.amount))
+        const datesExpense = response.data.map((item) => (item.date));
 
-        console.log('esto es amountData', amountData)
+        console.log('esto es amountData', amountDataExpense)
         console.log('esto es getDate', getDateExpense)
-        setExpenseAmountData(amountData);
-        setGetDateExpense(dates)
+        setExpenseAmountData(amountDataExpense);
+        setGetDateExpense(datesExpense)
     }catch ( error ){
         console.log('Error get Transactions', error)
     }
 };  
-
 useEffect(() => {
-    expenseDataGetter();
-  }, []);
-
+    expenseDataGetter()
+  }, [])
   
+
+
 
   //EXPENSES
   const formatDataByMonthExpense = () => {
@@ -117,6 +119,7 @@ useEffect(() => {
   };
 
   const dataByMonthIncome = formatDataByMonthIncome();
+
   
   const midata = {
     labels: months,

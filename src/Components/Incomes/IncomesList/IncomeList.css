@@ -1,4 +1,8 @@
-
+#income__card{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
 
 
 .incomeList__container {
@@ -9,10 +13,11 @@
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
     border-radius: 20px;
     margin-bottom: 1rem;
-    margin-right: 30em;
 }
 #items__incomes {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 3em;
 }
 
@@ -24,21 +29,6 @@
     border: 2px solid #fff;
 }
 
-/* h5{
-    font: 1.3rem;
-    padding-left: 2rem;
-    position: relative;
-    &::before{
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: .8rem;
-        height: .8rem;
-        border-radius: 50%;
-    }
-} */
 
 #dltIncome {
     color: #fff;
@@ -51,5 +41,42 @@
   }
 
 #dltIncome:active {
+    background: #d8bf92;
+  }
+
+  .title__popup {
+    color: #f7a20e;
+}
+
+.modal__header{
+    background: #000000c9;
+}
+
+.modal__body {
+    background: #000000d4;
+}
+#modal__footer{
+    background: #000000c9;
+}
+
+.input__popup {
+    border: 1px solid #fff;
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.03);
+}
+
+.label__popup {
+    font-size: 15px;
+}
+
+#btn__saveChanges{
+    color: #fff;
+    background: #f7a20e;
+    border: none;
+}
+
+#btn__saveChanges:hover {
+    background: #ffbe4d;
+}
+#btn__saveChanges:active {
     background: #d8bf92;
   }

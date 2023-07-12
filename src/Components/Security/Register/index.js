@@ -71,6 +71,7 @@ const Register = () => {
           window.localStorage.setItem('token', token);
           window.localStorage.setItem("userId", userId)
           window.localStorage.setItem("imageUrl", imageUrl)
+          navigate("/dashboard")
         }catch (error) {
           setError(error.response.data.error)
         }
@@ -95,7 +96,7 @@ const Register = () => {
       const navigate = useNavigate();
       async function handleClick(){
          await AuthRegister()
-         navigate("/dashboard")
+
       }
 
 

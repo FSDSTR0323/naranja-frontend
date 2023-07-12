@@ -1,6 +1,5 @@
 
-
-#expense__container {
+#income__container {
     background: #ffffffae;
     display: flex;
     flex-direction: column;
@@ -9,6 +8,14 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     margin: 3em;
+}
+#total__income{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    color: green;
 }
 
 
@@ -23,11 +30,10 @@
     align-items: center;
     margin: 1em;
 }
-
-#total__income, .title__totalIncome {
-    color: green;
-    font-weight: bold;
+.title__totalIncome{
+    color: #f7a20e;
 }
+
 
 #form__container__income {
     display: flex;

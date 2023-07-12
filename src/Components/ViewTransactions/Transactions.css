@@ -10,6 +10,7 @@
   background: #ffffffae;
   border-radius: 10px;
   height: 100vh;
+  overflow: auto;
 }
 
 .title__transaction {

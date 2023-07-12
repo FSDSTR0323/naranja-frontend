@@ -1,6 +1,5 @@
 
 
-
 .history__container{
     display: flex;
     position: relative;
@@ -27,6 +26,11 @@
     gap: 2em;
     flex-wrap: wrap;
     padding-bottom: .5em;
+}
+
+
+.icon{
+    color: rgba(0, 0, 0, 0.688)
 }
 
 

@@ -14,11 +14,11 @@
     border-radius: 20px;
     margin-bottom: 1rem;
 }
+
 #items__incomes {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 3em;
+    gap: 1.4em;
 }
 
 .icon {

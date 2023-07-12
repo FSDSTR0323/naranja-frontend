@@ -67,7 +67,7 @@ const FormIncome = () => {
     <>
     <Menu/>
 
-    <div id='expense__container'>
+    <div id='income__container'>
         <div className='title_income'>
             <h2>Incomes</h2>
         </div>

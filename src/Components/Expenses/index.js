@@ -5,6 +5,7 @@ import axios from 'axios';
 import Menu from '../Menu';
 import ExpenseList from './ExpenseList';
 
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const FormExpense = () => {
@@ -58,7 +59,7 @@ const FormExpense = () => {
       <Menu />
 
       <div id='expense__container'>
-        <div className='title_expense'>
+        <div className='title__expense'>
           <h2>Expenses</h2>
         </div>
 

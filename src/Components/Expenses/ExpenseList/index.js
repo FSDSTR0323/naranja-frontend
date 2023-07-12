@@ -3,6 +3,32 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import '../ExpenseList/ExpenseList.css';
 import { dateFormat } from '../../utils/dateFormat';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faGraduationCap,
+  faShoppingBasket,
+  faBriefcaseMedical,
+  faHamburger,
+  faTshirt,
+  faPlane,
+  faEllipsisH,
+  faTv
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(
+  faBars,
+  faTimes,
+  faGraduationCap,
+  faShoppingBasket,
+  faBriefcaseMedical,
+  faHamburger,
+  faTshirt,
+  faPlane,
+  faEllipsisH,
+  faTv
+);
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -40,25 +66,54 @@ const ExpenseList = ({ refresh }) => {
     setShowModal(true);
   };
 
+  const ExpenseCard = ({ title, amount, date, category, description, _id }) => {
+    let icon = null;
 
-  const ExpenseCard = ({ title, amount, date, category, description, _id }) => (
-    <div className='expenseList__container'>
-      <div id='items__expenses'>
-        <div className='icon'></div>
-        <h5>{title}</h5>
-        <p>{amount}</p>
-        <date>{dateFormat(date)}</date>
-        <p>{category}</p>
-        <p>{description}</p>
-        <Button type='submit'variant='secondary' id='mdfyIncome' onClick={() => handleModifyExpense(_id)}>
-          Modify
-        </Button>
-        <Button type='submit' id='dltExpense' onClick={() => handleDeleteExpense(_id)}>
-          Delete
-        </Button>
+    switch (category) {
+      case 'Education':
+        icon = <FontAwesomeIcon className='icon' icon='graduation-cap' />;
+        break;
+      case 'Groceries':
+        icon = <FontAwesomeIcon className='icon' icon='shopping-basket' />;
+        break;
+      case 'Health':
+        icon = <FontAwesomeIcon className='icon' icon='briefcase-medical' />;
+        break;
+        case 'Subscriptions':
+        icon = <FontAwesomeIcon className='icon' icon='tv' />;
+        break;
+      case 'Takeaways':
+        icon = <FontAwesomeIcon className='icon' icon='burger' />;
+        break;
+      case 'Clothing':
+        icon = <FontAwesomeIcon className='icon' icon='tshirt' />;
+        break;
+      case 'Travelling':
+        icon = <FontAwesomeIcon className='icon' icon='plane' />;
+        break;
+      default:
+        icon = <FontAwesomeIcon className='icon' icon='ellipsis-h' />;
+    }
+
+    return (
+      <div className='expenseList__container'>
+        <div id='items__expenses'>
+          {icon}
+          <h5>{title}</h5>
+          <p>{amount}</p>
+          <date>{dateFormat(date)}</date>
+          <p>{category}</p>
+          <p>{description}</p>
+          <Button type='submit' variant='secondary' id='mdfyIncome' onClick={() => handleModifyExpense(_id)}>
+            Modify
+          </Button>
+          <Button type='submit' id='dltExpense' onClick={() => handleDeleteExpense(_id)}>
+            Delete
+          </Button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -80,22 +135,21 @@ const ExpenseList = ({ refresh }) => {
   };
 
   return (
-  <>
-    
-    <div id='expense__card'>
-      {expenseList.map((expense) => (
-        <ExpenseCard
-        
-          key={expense._id}
-          _id={expense._id}
-          title={expense.title}
-          amount={expense.amount}
-          date={expense.date}
-          category={expense.category}
-          description={expense.description}
-        />
-      ))}
-    
+    <>
+      <div id='expense__card'>
+        {expenseList.map((expense) => (
+          <ExpenseCard
+            key={expense._id}
+            _id={expense._id}
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+            category={expense.category}
+            description={expense.description}
+          />
+        ))}
+      </div>
+
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton className='modal__header'>
           <Modal.Title className='title__popup'>Modify Expense</Modal.Title>
@@ -156,13 +210,12 @@ const ExpenseList = ({ refresh }) => {
           <Button variant='secondary' onClick={handleCloseModal}>
             Close
           </Button>
-          <Button  id='btn__saveChanges' onClick={handleSaveChanges}>
+          <Button id='btn__saveChanges' onClick={handleSaveChanges}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
-  </>
+    </>
   );
 };
 

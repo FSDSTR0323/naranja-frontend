@@ -4,15 +4,6 @@
     flex-wrap: wrap;
 }
 
-#totalExpenses {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 1em;
-    text-align: center;
-    font-weight: bold;
-    font-size: 30px;
-    color: red;
-}
 
 .expenseList__container {
     display: flex;

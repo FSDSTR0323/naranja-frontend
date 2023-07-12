@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import '../Menu/Menu.css'
 import { NavLink } from 'react-router-dom';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
 library.add(faBars, faTimes);
 
 
-const getImage = window.localStorage.getItem("imageUrl");
+
+const Menu = () => {
+  
+  const avatarImage = window.localStorage.getItem("imageUrl");
+  
     // Logout
     const logout = () => {
       localStorage.removeItem('token')
       localStorage.removeItem('imageUrl')
       localStorage.removeItem('userId')
   }
-
-const Menu = () => {
 
   const [isMenuOpen, setMenuOpen] = useState(false)
 
@@ -30,7 +30,7 @@ const Menu = () => {
       <div className='menu__container'>
         <div className='img__profile'>
         <NavLink className='routes' to='/profile'>
-        <img className='newImg__avatar__menu' src={getImage ? getImage : 'https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_081-account-user-profile-avatar-512.png'} alt='' />
+        <img className='newImg__avatar__menu' src={avatarImage ? avatarImage : 'https://cdn1.iconfinder.com/data/icons/vibrancie-action/30/action_081-account-user-profile-avatar-512.png'} alt='' />
         </NavLink>
       </div>
         <div id='title__app'>
@@ -53,7 +53,7 @@ const Menu = () => {
 
               <li><NavLink className='routes' to='/viewTransactions'>View Transactions</NavLink><span className='menu-text'>View Transactions</span></li>
 
-              <li><NavLink id='sign__out' className='routes' to='/' onClick={logout}>Sign Out</NavLink><span className='menu-text'>Sign Out</span></li>
+              <li><NavLink id='sign__out' className='routes' to='/' onClick={logout}>Sign Out</NavLink><span className='menu-text'> Sign Out</span></li>
             </ul>
           </div>
         </nav>

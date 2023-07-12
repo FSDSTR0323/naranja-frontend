@@ -10,6 +10,15 @@
     margin: 3em;
 }
 
+#total__expense {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    color: red;
+}
+
 #amount__totalExpenses {
     display: flex;
     border: 3px solid rgb(255, 253, 253);
@@ -22,8 +31,11 @@
     margin: 1em;
 }
 
+.title__totalExpense{
+    color: #f7a20e;
+}
 
-#total__expense, .title__totalExpense {
+#total__expense {
     color: #ff0000;
     font-weight: bold;
 }
@@ -34,7 +46,7 @@
     flex-wrap: wrap;
 
 }
-.title_expense {
+.title__expense {
     margin: 1em;
     padding: 1em;
     color: #f7a20e;
@@ -85,3 +97,5 @@
     margin-top: 3em;
     padding: 1em;
 }
+
+

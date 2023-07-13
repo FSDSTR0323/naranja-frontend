@@ -29,8 +29,13 @@ const Login = () => {
       window.localStorage.setItem("userId", userId)
       window.localStorage.setItem("imageUrl", imageUrl)
       navigate("/dashboard")
+<<<<<<< HEAD
 
     }catch (error) {
+=======
+    }catch (error) {
+      console.log('This is error', error)
+>>>>>>> 6f1645206b02f710e7bac8beafb0d481b8098029
       console.log('This is error', error.response.data.error)
       setError(error.response.data.error)
     }
@@ -39,7 +44,11 @@ const Login = () => {
   const navigate = useNavigate();
  async function handleClick(){
     await AuthLogin()
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6f1645206b02f710e7bac8beafb0d481b8098029
     
   }
   return (

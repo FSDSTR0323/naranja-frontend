@@ -96,7 +96,11 @@ const Register = () => {
       const navigate = useNavigate();
       async function handleClick(){
          await AuthRegister()
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> 6f1645206b02f710e7bac8beafb0d481b8098029
       }
 
 

@@ -1,6 +1,7 @@
 .user__container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   margin: 3em;
   padding: 2em;
   border: 3px solid rgb(255, 253, 253);
@@ -8,75 +9,75 @@
   background: #ffffffae;
   border-radius: 10px;
 }
-
+/* .custom__form__user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
 .profile__title {
+  display: block;
     color: #f7a20e;
     margin: .5em;
     padding: .5em;
 }
 
-.custom__form__user {
+.form__user {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  
+  flex-direction: column;
+  justify-content: center;
+  /* width: 50%; */
 }
 
 #container__avatar {
-    display: flex;
+  display: flex;
+  justify-content: center;
+  display: block;
+  background: #fff6e6;
+  border: 5px dashed #ffbe4d;
+  padding: 1em;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
+.span__img{
+  display: flex;
+  justify-content: center;
+  color:  #f7a20e;
+  font-style: italic;
+  font-size: 20px;
+}
 #input__img {
-  margin-top: 2em;
-  margin-left: 2em;
- 
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.file-input-label{
+  position: relative;
+  width: 100%;
+}
+#image__container{
+  display: flex;
+  justify-content: center;
+}
+.form-label {
+  margin-top:  .5em;
 }
 
 #dltImg__container {
-  margin: 1em;
+display: flex;
+justify-content: center;
+padding-top: 1em;
 }
-
-.form__user {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 1em;
-  margin-top: 1em;
-}
-
-.container__group, .container__last__group{
-  display: flex;
-  gap: 1em;
-}
-
-#birthdate, #address{
-  width: 270px;
-}
-#gender {
-  width: auto;
-  margin-left: 11em;
-}
-#password {
-  width: 300px;
-}
-
 
 .newImg__avatar__profile {
   width: 200px;
   height: 200px;
 }
 
-#label {
-  padding-bottom: 0.5em;
-}
-
 #btn__saveAll {
-  margin-top: .5em;
-  cursor: pointer;
-  color: #fff;
-  background: #f7a20e;
-  border: none;
-  margin-bottom: 1em;
+  margin-top: 1em;
+background: #f7a20e;
+border: none;
 }
 
 #btn__saveAll:hover {

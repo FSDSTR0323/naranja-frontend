@@ -10,8 +10,49 @@
 }
 
 #container__avatar__register {
-  margin-left: 10em;
+  display: flex;
+  justify-content: center;
+  display: block;
+  background: #fff6e6;
+  border: 5px dashed #ffbe4d;
+  padding: 1em;
+  border-radius: 5px;
+  cursor: pointer;
 }
+
+
+.span__img__register{
+  display: flex;
+  justify-content: center;
+  color:  #f7a20e;
+  font-style: italic;
+  font-size: 20px;
+}
+
+#input__img__register{
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.file-input-label__register {
+  position: relative;
+  width: 100%;
+}
+#image__container__register{
+  display: flex;
+  justify-content: center;
+
+}
+.newImg__avatar__register {
+  display: flex;
+  justify-content: end;
+  margin-top: 2em;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
 
 .text-danger {
     color: #f7a20e !important;

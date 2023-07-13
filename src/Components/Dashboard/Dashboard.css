@@ -21,7 +21,7 @@ h6{
     margin: 1em;
     padding: 1em;
 }
-label {
+.labels__dashboard {
     color: #ffbe4d;
     text-align: start;
     font-size: 20px;

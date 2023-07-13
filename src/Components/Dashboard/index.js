@@ -99,7 +99,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <label>Category chart</label>
+        <label className='labels__dashboard'>Category chart</label>
         <div className='pieChart__container'>
           <Pie />
         </div>

@@ -78,11 +78,11 @@ const Profile = ({refresh}) => {
             const {data} = await axios.post(`${backendUrl}/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, city, country, address, postCode, image })
             const imageUrl = image
             console.log('imageurl', imageUrl)
-          window.localStorage.setItem('imageUrl', imageUrl)
-          setUserInfo(data)
-          setError('')
+            window.localStorage.setItem('imageUrl', imageUrl)
+            setUserInfo(data)
+            setError('')
         }catch (error) {
-          setError(error.response.data.error)
+            setError(error.response.data.error)
         }
       }
 
@@ -91,7 +91,7 @@ const Profile = ({refresh}) => {
 
 
       
-      const deleteImage = async (_id) => {
+    const deleteImage = async (_id) => {
         localStorage.removeItem('imageUrl');
 
         try {
@@ -103,6 +103,10 @@ const Profile = ({refresh}) => {
         console.log(error);
         }
   };
+    useEffect(() => {
+        avatarGetter()
+        console.log('avatar get')
+    }, [])
  
 
     const initialData = {
@@ -171,41 +175,48 @@ const Profile = ({refresh}) => {
        
         <Form className='custom__form__user' noValidate onSubmit={handleSubmit}>
       
-            <div id='container__avatar'>
-                <input type="file" id='input__img' onChange={UploadAvatar}/>
+        <div id='container__avatar'>
+            <label className="file-input-label">
+                <span className='span__img'>Drag an image here:</span>
+                    {!image && <input type="file" id='input__img' onChange={UploadAvatar} />}
                 
-                {image && <img className='newImg__avatar__profile' src={image} alt='' />}      
-            </div>
+                    {image && (
+                        <div id='image__container'>
+                            <img className='newImg__avatar__profile' src={image} alt='' />
+                        </div>
+                    )}
+                
+            </label>
+        </div>
             <div id='dltImg__container'>
                 <Button variant='secondary' id='dltImg' onClick={deleteImage} >Delete</Button>
             </div>
 
         <div className='form__user'>
 
-            <div className='container__group'>
+ 
                 <Form.Group>
-                    <Form.Label className='text-danger' id='label' >Name:</Form.Label>
+                    <Form.Label className='text-danger labels__profile' >Name:</Form.Label>
                     <Form.Control required  name='name' placeholder={userInfo.name} onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size='md' /> 
                     {errors.name && <div className="alert alert-warning p-1">{errors.name}</div>}
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label  className='text-danger' id='label'>Surname:</Form.Label>
+                    <Form.Label  className='text-danger labels__profile'>Surname:</Form.Label>
                     <Form.Control id='surName' required  placeholder={userInfo.surName} onChange={e => setSurname(e.currentTarget.value)} name='surName' type='text' size='md' />
                     {errors.surName && <div className="alert alert-warning p-1">{errors.surName}</div>}
                 </Form.Group>
 
-            </div>
+      
 
-            <div className='container__group'>
                 <Form.Group>
-                    <Form.Label  className='text-danger' id='label'>Birthdate:</Form.Label>
+                    <Form.Label  className='text-danger' >Birthdate:</Form.Label>
                     <Form.Control id='birthdate' size='md' required className='birthdate' placeholder={userInfo.birthdate} onChange={e => setBirthdate(e.currentTarget.value)} type='date' name='birthdate' />
                     {errors.birthdate && <div className="alert alert-warning p-1">{errors.birthdate}</div>}
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label  className='text-danger' id='label'>Gender:</Form.Label>
+                    <Form.Label  className='text-danger'>Gender:</Form.Label>
                         <Form.Select id='gender'>
                             <option label="Male" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)}  required className='gender' name='gender'/>
                             <option label="Female" value={userInfo.gender} onChange={e => setGender(e.currentTarget.value)} required className='gender' name='gender'/>
@@ -213,50 +224,50 @@ const Profile = ({refresh}) => {
                             {errors.gender && <div className="alert alert-warning p-1">{errors.gender}</div>}
                         </Form.Select>
                 </Form.Group>
-            </div>
+    
            
-            <div className='container__group'>
+  
                 <Form.Group>
-                    <Form.Label  className="text-danger" id='label'>Email:</Form.Label>
+                    <Form.Label  className="text-danger">Email:</Form.Label>
                     <Form.Control id="email" required  placeholder={userInfo.email} type="email" size='md'  autoComplete='user-name' name='email' onChange={e => setEmail(e.currentTarget.value)} />
                     {errors.email && <div className="alert alert-warning p-1">{errors.email}</div>}
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label  className="text-danger" id='label'>Password:</Form.Label>
+                    <Form.Label  className="text-danger" >Password:</Form.Label>
                     <Form.Control id='password' required type="password" size='md'  name='password' autoComplete="new-password" onChange={e => setPassword(e.currentTarget.value)}/>
                     {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
                 </Form.Group>
-            </div>
+  
         
 
-            <div className='container__group'>
+       
                 <Form.Group>
-                    <Form.Label className='text-danger' id='label'>Address:</Form.Label>
+                    <Form.Label className='text-danger' >Address:</Form.Label>
                     <Form.Control id='address' placeholder={userInfo.address} onChange={e => setAddress(e.currentTarget.value)} type='text' size='md'  autoComplete='address'  />
                     {errors.address && <div className="alert alert-warning p-1">{errors.address}</div>}
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label  className='text-danger' id='label'>Postcode:</Form.Label>
+                    <Form.Label  className='text-danger' >Postcode:</Form.Label>
                     <Form.Control id='postCode' placeholder={userInfo.postCode}  onChange={e => setPostCode(e.currentTarget.value)} type='text' size='md' />
                     {errors.postCode && <div className="alert alert-warning p-1">{errors.postCode}</div>}
                 </Form.Group>
-            </div>
+     
             
-            <div className='container__last__group'> 
+          
                 <Form.Group >
-                    <Form.Label  className='text-danger' id='label'>City:</Form.Label>
+                    <Form.Label  className='text-danger'>City:</Form.Label>
                     <Form.Control id='city' placeholder={userInfo.city} onChange={e => setCity(e.currentTarget.value)} type='text' size='md'/>
                     {errors.city && <div className="alert alert-warning p-1">{errors.city}</div>}
                 </Form.Group>
 
                 <Form.Group>
-                    <Form.Label  className='text-danger' id='label'>Country:</Form.Label>
+                    <Form.Label  className='text-danger' >Country:</Form.Label>
                     <Form.Control id='country' placeholder={userInfo.country} onChange={e => setCountry(e.currentTarget.value)} type='text' size='md' />
                     {errors.country && <div className="alert alert-warning p-1">{errors.country}</div>}
                 </Form.Group>
-            </div>
+       
             <Button type='submit' onClick={updateUser} id='btn__saveAll' size='lg'>Save All</Button>
             {error &&  <p id='err__msg'>{error}</p>}
             <Form.Text className='msg__signout__account'>Would you like to log out of your account?<NavLink className='signout__register routes' to='/' onClick={logout}>Sign Out</NavLink> </Form.Text>

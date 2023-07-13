@@ -11,12 +11,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFoundPage from './Components/NotFoundPage/NotFoundPage';
 import PrivateRoute from './Components/PrivateRoute';
 import HomeRoute from './Components/HomeRoute';
+import Footer from './Components/Footer';
 
 
 
 function App() {
 
   return (
+    <>
     <div id='general__container'>
     <BrowserRouter>
       <Routes>
@@ -31,8 +33,10 @@ function App() {
         <Route path="*" element={<NotFoundPage/>} />
       </Routes>
     </BrowserRouter>
+    
   </div>
-  
+  <Footer/>
+  </>
   );
 }
 

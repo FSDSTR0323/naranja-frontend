@@ -1,0 +1,23 @@
+#container__footer{
+    background-color: #fca30a;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 5em;
+}
+
+#copyRight__text{
+    display:flex;
+    justify-content: center;
+    color: #fff;
+}
+#contact__footer{
+    color: #fff;
+    text-decoration: underline;
+}
+.contact__list, .li__footer{
+    gap: 2em;
+    color: #fff;
+    text-decoration: none;
+}
+
+

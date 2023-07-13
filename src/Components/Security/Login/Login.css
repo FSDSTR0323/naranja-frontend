@@ -28,7 +28,9 @@
   .rememberMe {
     display: flex;
     align-items: center;
-    font-size: 15px;
+    font-size: 17px;
+    gap: 2em;
+    color: #f7a20e;
   }
 
   .btn__signIn {

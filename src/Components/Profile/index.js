@@ -193,8 +193,7 @@ const Profile = ({refresh}) => {
             </div>
 
         <div className='form__user'>
-
- 
+            
                 <Form.Group>
                     <Form.Label className='text-danger labels__profile' >Name:</Form.Label>
                     <Form.Control required  name='name' placeholder={userInfo.name} onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size='md' /> 
@@ -206,8 +205,6 @@ const Profile = ({refresh}) => {
                     <Form.Control id='surName' required  placeholder={userInfo.surName} onChange={e => setSurname(e.currentTarget.value)} name='surName' type='text' size='md' />
                     {errors.surName && <div className="alert alert-warning p-1">{errors.surName}</div>}
                 </Form.Group>
-
-      
 
                 <Form.Group>
                     <Form.Label  className='text-danger' >Birthdate:</Form.Label>
@@ -225,8 +222,6 @@ const Profile = ({refresh}) => {
                         </Form.Select>
                 </Form.Group>
     
-           
-  
                 <Form.Group>
                     <Form.Label  className="text-danger">Email:</Form.Label>
                     <Form.Control id="email" required  placeholder={userInfo.email} type="email" size='md'  autoComplete='user-name' name='email' onChange={e => setEmail(e.currentTarget.value)} />
@@ -238,10 +233,7 @@ const Profile = ({refresh}) => {
                     <Form.Control id='password' required type="password" size='md'  name='password' autoComplete="new-password" onChange={e => setPassword(e.currentTarget.value)}/>
                     {errors.password && <div className="alert alert-warning p-1">{errors.password}</div>}
                 </Form.Group>
-  
-        
 
-       
                 <Form.Group>
                     <Form.Label className='text-danger' >Address:</Form.Label>
                     <Form.Control id='address' placeholder={userInfo.address} onChange={e => setAddress(e.currentTarget.value)} type='text' size='md'  autoComplete='address'  />

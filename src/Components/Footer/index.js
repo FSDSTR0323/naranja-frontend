@@ -20,7 +20,8 @@ const Footer = () => {
             </li>
             <li className='li__footer__contact'>
               <FaEnvelope className="contact__icon" />
-              <span> orangetracker05@gmail.com</span>
+    
+        <span> orangetracker05@gmail.com</span>
             </li>
           </ul>
           
@@ -34,6 +35,7 @@ const Footer = () => {
             </li>
             <li className='li__footer__support'>
               <span></span>
+
             </li>
           </ul>
 

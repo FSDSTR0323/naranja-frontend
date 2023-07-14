@@ -166,7 +166,7 @@ const Profile = ({refresh}) => {
       
         <div id='container__avatar'>
             <label className="file-input-label">
-                <span className='span__img'>Drag an image here:</span>
+                <span className='span__img'>Add image here:</span>
                     {!image && <input type="file" id='input__img' onChange={UploadAvatar} />}
                 
                     {image && (

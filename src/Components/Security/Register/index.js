@@ -116,7 +116,7 @@ const Register = () => {
 
                 <div id='container__avatar__register'>
                     <label className="file-input-label__register">
-                        <span className='span__img__register'>Drag an image here:</span>
+                        <span className='span__img__register'>Add an image here:</span>
                             {!image && <input type="file" id='input__img__register' onChange={UploadAvatar} />}
                         
                             {image && (

@@ -53,6 +53,7 @@ const Register = () => {
                 }else if (!regexList[key].test(value)){
                     errors[key] = `The "${key}" field only accepts letters and numbers.`
                 }
+                
             }
       
           return isError ? errors : null

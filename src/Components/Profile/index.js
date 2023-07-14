@@ -13,7 +13,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const Profile = ({refresh}) => {
     
     const [userInfo, setUserInfo] = useState([])
-    const [image, setImage] = useState(false)
+    const [image, setImage] = useState('')
 
     // const [userImage, setUserImage] = useState();
     const [name, setName] = useState('');
@@ -76,10 +76,9 @@ const Profile = ({refresh}) => {
 
         try{
             const {data} = await axios.post(`${backendUrl}/profile/modify/${userId}`, { email, password, name, surName, gender, birthdate, city, country, address, postCode, image })
-            const imageUrl = image
-            console.log('imageurl', imageUrl)
-            window.localStorage.setItem('imageUrl', imageUrl)
             setUserInfo(data)
+            const imageUrl = image
+            window.localStorage.setItem('imageUrl', imageUrl)
             setError('')
         }catch (error) {
             setError(error.response.data.error)
@@ -127,37 +126,27 @@ const Profile = ({refresh}) => {
     const onValidate = (form) => {
         let isError = false;
         let errors = {};
-        // let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-        // let regexsurName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-        // let regexBirthdate = /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/;
-        // let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
-        // let regexPassword = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-        // let regexAddress = '';
-        // let regexNumber = '';
-        // let regexCity = '';
-        // let regexCountry = '';
-        // let regexPostCode = '';
 
         const regexList = {
             name: /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/,
             surName: /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/,
             birthdate: /^(?:0?[1-9]|1[0-2])\/(?:0?[1-9]|[12][0-9]|3[01])\/(?:19|20)\d{2}$/,
             email: /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/,
-            password: /^(?=.*[A-Z])(?=.*\d).{8,}$/
+            password: /^(?=.*[A-Z])(?=.*\d).{8,}$/,
+            address: /^[A-Za-z0-9\s]+$/
         };
-
-        console.log('esto es form', form)
 
         const {email, password, name, surName, gender, birthdate, city, country, address, number, postCode, image} = form
 
-            for (const [key,value] of Object.entries(form)) { // Object.entries:  Nos devuelve una array con la key y value.
-                if(!value.trim()){
-                    errors[key] = `The "${key}" field must not be empty.`
-                    isError = true;
-                }else if (!regexList[key].test(value)){
-                    errors[key] = `The "${key}" field only accepts letters and numbers.`
-                }
+        for (const [key,value] of Object.entries(form)) { // Object.entries:  Nos devuelve una array con la key y value.
+            if(!value.trim()){
+                errors[key] = `The "${key}" field must not be empty.`
+                isError = true;
+            }else if (!regexList[key].test(value)){
+                errors[key] = `The "${key}" field only accepts letters and numbers.`
             }
+            
+        }
 
           return isError ? errors : null
         }
@@ -195,7 +184,7 @@ const Profile = ({refresh}) => {
         <div className='form__user'>
             
                 <Form.Group>
-                    <Form.Label className='text-danger labels__profile' >Name:</Form.Label>
+                    <Form.Label className='text-danger labels__profile'>Name:</Form.Label>
                     <Form.Control required  name='name' placeholder={userInfo.name} onChange={e => setName(e.currentTarget.value)}  className='name' type='text' size='md' /> 
                     {errors.name && <div className="alert alert-warning p-1">{errors.name}</div>}
                 </Form.Group>

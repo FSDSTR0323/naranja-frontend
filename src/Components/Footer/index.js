@@ -19,7 +19,7 @@ const Footer = () => {
             </li>
             <li className='li__footer'>
               <FaEnvelope className="contact__icon" />
-              <span> orangeTracker@gmail.com</span>
+              <span> orangeTracker05@gmail.com</span>
             </li>
           </ul>
           <p id='copyRight__text'>© 2023 OrangeTracker. All rights reserved.</p>
